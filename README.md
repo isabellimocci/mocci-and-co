@@ -1,6 +1,6 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/isabelli-mocci/handwork-ecommerce/refs/heads/main/public/banner-github.png" alt="Mocci & Co. Logo">
- <br><br><br>
+ <br><br>
 
   # 🛍️ Mocci & Co. Handwork E-commerce
 
