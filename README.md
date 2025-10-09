@@ -26,7 +26,7 @@
 
 This project showcases real-world e-commerce functionality including product browsing, filtering, shopping cart management, and a complete checkout flow.
 
-### 👉 Access the website [by clicking here!](https://mocci-and-co-handwork.vercel.app/)
+> 👉 Access the website [by clicking here!](https://mocci-and-co-handwork.vercel.app/)
 
 </div>
 
@@ -122,8 +122,10 @@ src/
 - **Mobile-First**: Optimized touch interactions and mobile navigation
 - **Tablet-Friendly**: Adapted layouts for medium screen sizes
 - **Desktop Enhanced**: Full-featured experience with expanded layouts
+  
+---
 
-## ⚠️ Known Limitations
+### ⚠️ Known Limitations
 - **Mock Data**: Currently uses static data instead of real API
 - **Payment Processing**: Simulated payment flow (no real transactions)
 - **User Authentication**: Not implemented (planned for future versions)
