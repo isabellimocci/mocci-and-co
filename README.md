@@ -2,42 +2,61 @@
   <img src="https://raw.githubusercontent.com/isabelli-mocci/handwork-ecommerce/refs/heads/main/public/banner-github.png" alt="Mocci & Co. Logo">
  <br><br>
 
-  # 🛍️ Mocci & Co. Handwork E-commerce
+![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript_5.8-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite_6.3-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS_3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion_12.23-0055FF?style=for-the-badge&logo=framer&logoColor=white)
+![React Router](https://img.shields.io/badge/React_Router_7.6-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 
-<br>
-
-![React](https://img.shields.io/badge/React-19.1-FF69B4?style=for-the-badge&logo=react&logoColor=white&labelColor=FF69B4&link=https%3A%2F%2Freact.dev%2F)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white&labelColor=3178C6&link=https%3A%2F%2Fwww.typescriptlang.org%2F)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=06B6D4&link=https%3A%2F%2Ftailwindcss.com%2F)
-![Vite](https://img.shields.io/badge/Vite-6.3-646CFF?style=for-the-badge&logo=vite&logoColor=white&labelColor=646CFF&link=https%3A%2F%2Fvitejs.dev%2F)
-![Framer](https://img.shields.io/badge/Framer%20Motion-12.23-FF0081?style=for-the-badge&logo=framer&logoColor=white&labelColor=FF0081&link=https%3A%2F%2Fwww.framer.com%2Fmotion%2F)
-![Router](https://img.shields.io/badge/React%20Router%20DOM-7.6-CA4245?style=for-the-badge&logo=react-router&logoColor=white&labelColor=CA4245&link=https%3A%2F%2Freactrouter.com%2F)
-
-</div> <br>
-
-<div align="center">
-
-Mocci & Co. Handwork is a fictional **handmade baby layette and crafts e-commerce**, developed as a portfolio project to enhance my **frontend development** skills. I focused on software architecture, componentization, state management, and user experience (UX).
-
-
-### Access the website [by clicking here!](https://mocci-and-co-handwork.vercel.app/)
+  # Mocci & Co. Handwork E-commerce
 
 </div>
 
-### Main Features
+<div align="justify">
 
-* **Dynamic Product Catalog**: Product listing page with filters by category, color, price range, and sorting.
-* **Product Details**: Dedicated page with complete information, image carousel, and interactivity.
-* **Shopping Cart & Checkout**: Full purchase flow, from adding products to a multi-step checkout.
-* **Wishlist**: Feature to favorite products and access them on a dedicated page.
-* **Enhanced UI/UX**: Custom confirmation toasts, loading states, and responsive design.
+<strong>Mocci & Co. Handwork</strong> is a fictional e-commerce site specializing in handmade plush toys. Developed as a portfolio project to demonstrate advanced frontend development skills, it focuses on:
 
-### Live Demo
+- Scalable software architecture
+- Componentization and code reuse
+- User experience (UX) and modern interface
+- Mobile-first responsive design
+- Performance and optimization
 
-This project is online and can be accessed here:
-👉 **[https://mocci-and-co-handwork.vercel.app/](https://mocci-and-co-handwork.vercel.app/)**
+This project showcases real-world e-commerce functionality including product browsing, filtering, shopping cart management, and a complete checkout flow.
 
-## 🚀 Technologies
+### 👉 Access the website [by clicking here!](https://mocci-and-co-handwork.vercel.app/)
+
+</div>
+
+## Features
+
+### **Advanced Product Catalog**
+- **Smart Filtering System**: Multi-criteria filtering by category, color, price range, and text search
+- **Dynamic Sorting**: Sort products by price (ascending/descending), name (A-Z/Z-A), and best-selling
+- **Responsive Design**: Optimized sidebar filters for mobile and desktop layouts
+- **Real-time Updates**: Instant filtering and sorting without page reloads
+
+### **Immersive Product Experience**
+- **Interactive Image Gallery**: Multiple product images with smooth transitions
+- **Mobile-Optimized Carousel**: Touch-friendly image navigation for mobile devices
+- **Lightbox Integration**: Full-screen image viewing with `yet-another-react-lightbox`
+- **Product Actions**: Add to cart, add to wishlist, share functionality
+
+### **Seamless Shopping Flow**
+- **Persistent Cart State**: Shopping cart maintained across sessions using React Context
+- **Multi-step Checkout**: Guided checkout process with shipping and payment steps
+- **Form Validation**: Real-time form validation with TypeScript type safety
+- **Loading States**: Comprehensive loading feedback throughout the purchase flow
+
+### **Enhanced User Experience**
+- **Toast Notifications**: Custom notifications using `react-hot-toast`
+- **Micro-interactions**: Smooth animations powered by Framer Motion
+- **Wishlist Persistence**: Favorites saved to localStorage with state management
+- **Error Boundaries**: Graceful error handling with custom error pages
+
+## Technologies
 
 | Category       | Technology                                        |
 | -------------- | ------------------------------------------------- |
@@ -47,11 +66,16 @@ This project is online and can be accessed here:
 | **Animations** | 🔹 **Framer Motion** (Animation library)          |
 | **Tools**      | 🔹 **Vite** (Dev environment & build tool)        |
 | **Deployment** | 🔹 **Vercel** (Hosting & CI/CD deployment)        |
-| **Others**     | 🔹 **React Router DOM** (Routing)                 |
+| **Routing**    | 🔹 **React Router DOM** (Client-side routing)     |
+| **UI/UX**      | 🔹 **React Hot Toast** (Notifications system)     |
+|                | 🔹 **React Icons** (Icon library)                 |
+|                | 🔹 **Yet Another React Lightbox** (Image gallery) |
+| **Code Quality** | 🔹 **ESLint** (Code linting & formatting)       |
+|                | 🔹 **Jest & Testing Library** (Unit testing)      |
 
-## 📁 Project Structure & Architecture
+## Project Structure
 
-The project follows a **Component-Based Architecture** with strong emphasis on separation of concerns. State logic and business rules are encapsulated in **custom hooks**, keeping UI components clean and reusable. This makes the code more maintainable, reusable, and testable.
+The project follows a **Component-Based Architecture** with strong emphasis on separation of concerns. State logic and business rules are encapsulated in **custom hooks**, keeping UI components clean and reusable.
 
 ### Folder Organization
 
@@ -74,23 +98,40 @@ src/
 └── utils/         # Utility functions & helpers
 ```
 
-## ✨ Features
+## Visual Showcase
 
-### **Cart & Checkout**
+### Homepage & Product Details
 
-The purchase flow is complete and intuitive. On the `CartPage`, users can adjust quantities and remove items. The `CheckoutPage` is divided into steps (shipping and payment), with loading feedback and a confirmation modal at the end.
+<div align="center">
+  <img src="./public/homepage-demo.gif" alt="Homepage and Product Detail Demo">
+</div>
 
-### **Wishlist**
+### Product Catalog & Shopping Experience
 
-The `WishlistPage` allows users to save products for later. State persistence is handled via `localStorage`.
+<div align="center">
+  <img src="./public/product-demo.gif" alt="Product Catalog and Shopping Demo">
+</div>
 
-### **Filters & Search**
+### Mobile Experience
 
-The `ProductsPage` offers filters by category, color, price, and a search bar, along with dynamic sorting options.
+<div align="center">
+  <img src="./public/mobile-demo.gif" alt="Mobile Experience Demo" width="200px">
+</div>
+
+### Responsive Design
+- **Mobile-First**: Optimized touch interactions and mobile navigation
+- **Tablet-Friendly**: Adapted layouts for medium screen sizes
+- **Desktop Enhanced**: Full-featured experience with expanded layouts
+
+## ⚠️ Known Limitations
+- **Mock Data**: Currently uses static data instead of real API
+- **Payment Processing**: Simulated payment flow (no real transactions)
+- **User Authentication**: Not implemented (planned for future versions)
+- **Inventory Management**: Static stock levels (no real-time updates)
 
 ---
 
-## 🔒 License & Copyright
+### 🔒 License & Copyright
 
 © 2025 Mocci & Co. All rights reserved.
 
@@ -99,31 +140,12 @@ This is a **personal portfolio project**. The design, code, and concept must not
 ---
 <div align="center">
   Made with 🩷 by  <a href="https://www.isabellimocci.com/"> Isabelli Mocci</a>
-</div> <br>
 
-<!-- Minha assinatura -->
-<table align="center">
-  <tr>
-    <td align="center" width="150px">
-      <a href="https://github.com/isabelli-mocci">
-        <img src="https://avatars.githubusercontent.com/u/191166352?v=4" width="100px" style="border-radius: 50%;" alt="Isabelli Mocci Avatar"/>
-        <br>
-      </a>
-    </td>
-    <td align="left" style="padding-left: 15px;">
-      <p><strong>📬 Contact us:</strong></p>
-      <p>
-        <a href="https://www.linkedin.com/in/isabelli-mocci/" target="_blank" style="text-decoration: none;">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" width="18px" alt="LinkedIn">
-          <span>LinkedIn - Isabelli Cristina Mocci</span>
-        </a>
-      </p>
-      <p>
-        <a href="mailto:isabellimocci.tech@gmail.com" style="text-decoration: none;">
-          <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" width="18px" alt="Email">
-          <span>Email - isabellimocci.tech@gmail.com</span>
-        </a>
-      </p>
-    </td>
-  </tr>
-</table>
+  [🌐 Portfolio](www.isabellimocci.com) 
+| [💼 LinkedIn](https://linkedin.com.br/in/isabelli-mocci/)
+| [🐱 GitHub](https://github.com/isabelli-mocci) 
+| [📬 E-mail](isabellimocci.tech@gmail.com)
+
+</div>
+
+
