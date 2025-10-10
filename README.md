@@ -100,22 +100,16 @@ src/
 
 ## Visual Showcase
 
-### Homepage & Product Details
+### Desktop Experience
 
 <div align="center">
-  <img src="./public/homepage-demo.gif" alt="Homepage and Product Detail Demo">
-</div>
-
-### Product Catalog & Shopping Experience
-
-<div align="center">
-  <img src="./public/product-demo.gif" alt="Product Catalog and Shopping Demo">
+  <img src="./public/desktop-demo.gif" alt="Desktop Demo">
 </div>
 
 ### Mobile Experience
 
 <div align="center">
-  <img src="./public/mobile-demo.gif" alt="Mobile Experience Demo" width="200px">
+  <img src="./public/mobile-demo.gif" alt="Mobile Demo" width="200px">
 </div>
 
 ### Responsive Design
