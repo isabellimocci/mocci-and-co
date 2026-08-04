@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/isabelli-mocci/handwork-ecommerce/refs/heads/main/public/banner-github.png" alt="Mocci & Co. Logo">
+  <img src="https://raw.githubusercontent.com/isabellimocci/handwork-ecommerce/refs/heads/main/public/banner-github.png" alt="Mocci & Co. Logo">
  <br><br>
 
 ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -138,8 +138,8 @@ This is a **personal portfolio project**. The design, code, and concept must not
   Made with 🩷 by  <a href="https://www.isabellimocci.com/"> Isabelli Mocci</a>
 
   [🌐 Portfolio](www.isabellimocci.com) 
-| [💼 LinkedIn](https://linkedin.com.br/in/isabelli-mocci/)
-| [🐱 GitHub](https://github.com/isabelli-mocci) 
+| [💼 LinkedIn](https://linkedin.com.br/in/isabellimocci/)
+| [🐱 GitHub](https://github.com/isabellimocci) 
 | [📬 E-mail](isabellimocci.tech@gmail.com)
 
 </div>
