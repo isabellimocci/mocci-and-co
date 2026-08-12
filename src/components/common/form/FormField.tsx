@@ -22,6 +22,7 @@ const FormField: React.FC<FormFieldProps> = memo(({
   required = false
 }) => (
   <div className="flex flex-col w-full">
+    <label htmlFor={id} className="sr-only">{placeholder}</label>
     <input
       type={type}
       id={id}
@@ -31,10 +32,13 @@ const FormField: React.FC<FormFieldProps> = memo(({
       placeholder={placeholder}
       className="w-full h-[48px] px-3 text-base border-b border-secondary bg-transparent focus:outline-none focus:border-primary transition-colors placeholder:text-text/70 [appearance:textfield]"
       required={required}
+      aria-required={required || undefined}
+      aria-invalid={error ? true : undefined}
+      aria-describedby={error ? `${id}-error` : undefined}
       autoComplete="off"
     />
     {error && (
-      <span className="text-xs text-red-600/65 mt-1">
+      <span id={`${id}-error`} role="alert" className="text-xs text-red-600/65 mt-1">
         {error}
       </span>
     )}

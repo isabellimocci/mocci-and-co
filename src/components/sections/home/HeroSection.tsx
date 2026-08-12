@@ -2,19 +2,20 @@ import heroBannerMobile from '../../../assets/images/hero-banner-mobile.jpg';
 import heroBannerDesktop from '../../../assets/images/hero-banner-desktop.jpg';
 import ctaBanner from '../../../assets/images/cta-hero-section.png';
 import '../../../index.css';
-import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 
 const BannerImage: React.FC = () => (
   <picture>
-    <source
-      media='(min-width: 768px)'
-      srcSet={heroBannerDesktop}
-    />
+    <source media='(min-width: 768px)' srcSet={heroBannerDesktop} width={1861} height={1045} />
     <img
       src={heroBannerMobile}
+      width={783}
+      height={1044}
+      fetchPriority='high'
+      loading='eager'
+      decoding='async'
       alt='Royal Elegance banner - Mocci & Co.'
-      className='w-full h-auto object-cover animate-zoomInLoop'
+      className='w-full object-cover aspect-[783/1044] md:aspect-[1861/1045]'
     />
   </picture>
 );
@@ -40,37 +41,22 @@ const ShopNowButton: React.FC = () => {
 };
 
 const HeroSection: React.FC = () => (
-  <motion.section
-    className='hero-section relative w-full overflow-hidden'
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true, amount: 0.3 }}
-    transition={{ duration: 0.5, ease: 'easeOut' }}
-  >
+  <section className='hero-section relative w-full overflow-hidden'>
     <BannerImage />
-    <motion.div
-      className='absolute top-0 left-0 right-0 flex justify-center z-20 pt-4 md:pt-8'
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay: 0.1, ease: 'easeOut' }}
-    >
+    <div className='absolute top-0 left-0 right-0 flex justify-center z-20 pt-4 md:pt-8'>
       <img
         src={ctaBanner}
+        width={441}
+        height={201}
+        decoding='async'
         alt='Royal Elegance banner - Mocci & Co.'
         className='w-48 md:w-56 lg:w-64 xl:w-1/4 h-auto object-contain mx-auto'
       />
-    </motion.div>
-    <motion.div
-      className='absolute inset-0 flex flex-col items-center text-center p-4 h-full justify-end'
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5, delay: 0.2, ease: 'easeOut' }}
-    >
+    </div>
+    <div className='absolute inset-0 flex flex-col items-center text-center p-4 h-full justify-end'>
       <HeroCTA />
-    </motion.div>
-  </motion.section>
+    </div>
+  </section>
 );
 
 export default HeroSection;

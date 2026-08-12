@@ -29,18 +29,27 @@ export const Select: React.FC<SelectProps> = ({
   error,
   className = '',
   disabled,
+  id,
   children,
   ...props
-}) => (
-  <div className='mt-4 w-full'>
-    {label && <label className={styles.label}>{label}</label>}
-    <select
-      className={`${styles.select} ${disabled ? styles.disabled : ''} ${className}`}
-      disabled={disabled}
-      {...props}
-    >
-      {children}
-    </select>
-    {error && <span className={styles.error}>{error}</span>}
-  </div>
-);
+}) => {
+  const generatedId = React.useId();
+  const selectId = id ?? generatedId;
+  const errorId = `${selectId}-error`;
+  return (
+    <div className='mt-4 w-full'>
+      {label && <label htmlFor={selectId} className={styles.label}>{label}</label>}
+      <select
+        id={selectId}
+        className={`${styles.select} ${disabled ? styles.disabled : ''} ${className}`}
+        disabled={disabled}
+        aria-invalid={error ? true : undefined}
+        aria-describedby={error ? errorId : undefined}
+        {...props}
+      >
+        {children}
+      </select>
+      {error && <span id={errorId} role="alert" className={styles.error}>{error}</span>}
+    </div>
+  );
+};

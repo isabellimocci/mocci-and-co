@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useMemo, type ReactNode } from 'react';
 import { NotificationContext } from './NotificationGlobal';
 import { toast } from 'react-hot-toast';
 
@@ -31,8 +31,11 @@ const notify = (message: string, type?: NotificationType): void => {
   }
 };
 
-export const NotificationProvider = ({ children }: NotificationProviderProps) => (
-  <NotificationContext.Provider value={{ notify }}>
-    {children}
-  </NotificationContext.Provider>
-);
+export const NotificationProvider = ({ children }: NotificationProviderProps) => {
+  const value = useMemo(() => ({ notify }), []);
+  return (
+    <NotificationContext.Provider value={value}>
+      {children}
+    </NotificationContext.Provider>
+  );
+};

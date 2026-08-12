@@ -1,4 +1,4 @@
-import { QRCode } from 'qrcode-svg';
+import QRCode from 'qrcode-svg';
 
 interface QRCodeGeneratorOptions {
   content: string;

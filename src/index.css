@@ -81,3 +81,15 @@ body {
   animation: zoomInLoop 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   will-change: transform, opacity;
 }
+
+/* --- Text selection: brand brown instead of default blue --- */
+
+::selection {
+  background-color: #5e3517;
+  color: #f5f0ec;
+}
+
+::-moz-selection {
+  background-color: #5e3517;
+  color: #f5f0ec;
+}

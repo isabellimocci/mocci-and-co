@@ -16,18 +16,21 @@ interface InputProps {
 }
 
 export const TextInput: FC<InputProps> = ({ id, name, type = 'text', placeholder, value, onChange, required }) => (
-  <input
-    id={id}
-    name={name}
-    type={type}
-    placeholder={placeholder}
-    value={value}
-    onChange={onChange}
-    className={INPUT_CLASS}
-    required={required}
-    aria-required={required}
-    autoComplete={name}
-  />
+  <>
+    <label htmlFor={id} className="sr-only">{placeholder}</label>
+    <input
+      id={id}
+      name={name}
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      className={INPUT_CLASS}
+      required={required}
+      aria-required={required}
+      autoComplete={name}
+    />
+  </>
 );
 
 interface TextAreaProps extends Omit<InputProps, 'type'> {
@@ -35,15 +38,18 @@ interface TextAreaProps extends Omit<InputProps, 'type'> {
 }
 
 export const TextArea: FC<TextAreaProps> = ({ id, name, placeholder, value, onChange, required, rows = 6 }) => (
-  <textarea
-    id={id}
-    name={name}
-    placeholder={placeholder}
-    value={value}
-    onChange={onChange}
-    className={INPUT_CLASS + ' resize-y'}
-    required={required}
-    aria-required={required}
-    rows={rows}
-  />
+  <>
+    <label htmlFor={id} className="sr-only">{placeholder}</label>
+    <textarea
+      id={id}
+      name={name}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      className={INPUT_CLASS + ' resize-y'}
+      required={required}
+      aria-required={required}
+      rows={rows}
+    />
+  </>
 );

@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
         <p className='text-xs font-normal lg:text-sm text-text/60'>
           &copy; {currentYear} Mocci & Co. | All rights reserved.<br />
           <span className="block mt-1">
-            Website credit: <a href="https://www.linkedin.com/in/isabelli-mocci/" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">Isabelli Mocci</a>
+            Website credit: <a href="https://www.linkedin.com/in/isabellimocci/" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">Isabelli Mocci</a>
           </span>
         </p>
       </div>
