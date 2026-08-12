@@ -7,6 +7,8 @@ import FormField from '../../common/form/FormField';
 import ShippingMethod from './ShippingMethod';
 import { FormSection, FormRow, FormFieldWrapper } from '../../common/form/FormLayout';
 import { styles } from '../../../styles/checkout-form.styles';
+import { formatCurrency } from '../../../utils/currency.utils';
+import { EXPRESS_SHIPPING_COST } from '../../../utils/order.utils';
 
 interface CheckoutFormProps {
   data: ShippingFormData;
@@ -177,7 +179,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = memo(
                   checked={data.shippingMethod === 'express'}
                   onChange={onChange}
                   description="2-3 days"
-                  priceLabel="$10.00"
+                  priceLabel={formatCurrency(EXPRESS_SHIPPING_COST)}
                 />
               </div>
             </div>

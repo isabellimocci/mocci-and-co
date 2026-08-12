@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import type { FC, ReactNode } from 'react';
 import BankSlip from './BankSlip';
+import { FormButton } from '../../common/form/FormButton';
 import PixMock from './PixMock';
 import { BOLETO_MOCK_VALUE, PIX_MOCK_VALUE } from '../../../data/paymentForm.data';
 import { usePaymentForm } from '../../../hooks/usePaymentForm';
@@ -8,13 +9,11 @@ import PaymentMethodsSelector from './PaymentMethodsSelector';
 import PaymentInfo from './PaymentInfo.tsx';
 import FormActions from '../../common/form/FormActions.tsx';
 import { paymentIcons } from '../../../constants/paymentIcons.tsx';
-import CheckoutConfirmationModal from '../checkout/CheckoutConfirmationModal';
 import type { PaymentFormProps } from '../../../types/paymentForm.types.ts';
 import { useFormSubmission } from '../../../hooks/useFormSubmission.ts';
 import { useInputHandler } from '../../../hooks/useInputHandler.ts';
-import { useMockContainer } from '../../../hooks/useMockContainer.ts';
 
-const PaymentForm: React.FC<PaymentFormProps> = ({
+const PaymentForm: FC<PaymentFormProps & { giftOptionsSlot?: ReactNode }> = ({
   data,
   onChange,
   onBack,
@@ -23,9 +22,8 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
   error,
   totalAmount,
   shippingDetails,
+  giftOptionsSlot,
 }) => {
-  const [orderConfirmed, setOrderConfirmed] = useState(false);
-
   const {
     showMock,
     selectedMethod,
@@ -47,36 +45,34 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
 
   const { handleInputChange } = useInputHandler({ onChange });
 
-  const { mockContainerRef } = useMockContainer({
-    showMock,
-    selectedMethod,
-    setShowMock,
-    setOrderConfirmed
-  });
+  const handleConfirmMockPayment = () => {
+    onFinalize();
+  };
 
   const renderPaymentMock = () => {
     if (!showMock) return null;
 
-    const mockProps = {
-      value: selectedMethod === 'boleto' ? BOLETO_MOCK_VALUE : PIX_MOCK_VALUE,
-      MockComponent: selectedMethod === 'boleto' ? BankSlip : PixMock
-    };
-
     return (
-      <div ref={mockContainerRef} className='mb-8'>
-        <mockProps.MockComponent value={mockProps.value} />
-        <button
-          className='mt-6 px-6 py-2 rounded bg-primary text-white font-semibold hover:bg-primary/90 transition-colors'
-          onClick={handleMockBack}
-        >
-          Back
-        </button>
+      <div className='mb-8'>
+        {selectedMethod === 'boleto' ? (
+          <BankSlip value={BOLETO_MOCK_VALUE} amount={totalAmount} />
+        ) : (
+          <PixMock value={PIX_MOCK_VALUE} amount={totalAmount} />
+        )}
+        <div className='mt-6 flex flex-col-reverse gap-4 md:flex-row md:justify-start'>
+          <FormButton type='button' variant='secondary' onClick={handleMockBack} loading={loading}>
+            Back
+          </FormButton>
+          <FormButton type='button' variant='primary' onClick={handleConfirmMockPayment} loading={loading}>
+            I've paid
+          </FormButton>
+        </div>
       </div>
     );
   };
 
   const renderPaymentForm = () => {
-    if (showMock || orderConfirmed) return null;
+    if (showMock) return null;
 
     return (
       <form onSubmit={handleSubmit} className='space-y-8 w-full max-w-xl'>
@@ -104,15 +100,12 @@ const PaymentForm: React.FC<PaymentFormProps> = ({
         </div>
       )}
       <ShippingDetailsInfo shippingDetails={shippingDetails} />
+      {giftOptionsSlot}
       <PaymentMethodsSelector
         selectedMethod={selectedMethod}
         onSelect={handleMethodSelect}
         loading={loading}
         icons={paymentIcons}
-      />
-      <CheckoutConfirmationModal
-        isOpen={orderConfirmed}
-        onClose={() => setOrderConfirmed(false)}
       />
       {renderPaymentMock()}
       {renderPaymentForm()}

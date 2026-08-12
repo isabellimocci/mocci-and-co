@@ -1,7 +1,7 @@
-import { useCallback, useState } from 'react';
-import { validateDiscount } from '../utils/discountStrategies.utils';
+import { useContext, useMemo } from 'react';
+import { DiscountContext, type DiscountStatus } from '../context/DiscountContext';
 
-export type DiscountStatus = 'idle' | 'success' | 'error';
+export type { DiscountStatus };
 
 export interface DiscountState {
   value: number;
@@ -9,42 +9,15 @@ export interface DiscountState {
   message: string;
 }
 
-export function useDiscount(subtotal: number) {
-  const [discount, setDiscount] = useState<DiscountState>({ value: 0, status: 'idle', message: '' });
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleDiscountResult = (result: { valid: boolean; value: number; message: string }, onResult?: (message: string, type: 'success' | 'error') => void) => {
-    setDiscount({
-      value: result.valid ? result.value : 0,
-      status: result.valid ? 'success' : 'error',
-      message: result.message,
-    });
-    onResult?.(result.message, result.valid ? 'success' : 'error');
-  };
-
-  const applyDiscount = useCallback(
-    (code: string, onResult?: (message: string, type: 'success' | 'error') => void) => {
-      if (!code) {
-        setDiscount({ value: 0, status: 'error', message: 'Enter a code.' });
-        onResult?.('Enter a code.', 'error');
-        return;
-      }
-      setIsLoading(true);
-      setDiscount(prev => ({ ...prev, status: 'idle', message: '' }));
-      setTimeout(() => {
-        try {
-          const result = validateDiscount(code, subtotal);
-          handleDiscountResult(result, onResult);
-        } catch {
-          setDiscount({ value: 0, status: 'error', message: 'Unexpected error. Try again.' });
-          onResult?.('Unexpected error. Try again.', 'error');
-        } finally {
-          setIsLoading(false);
-        }
-      }, 1000);
-    },
-    [subtotal]
+export function useDiscount() {
+  const ctx = useContext(DiscountContext);
+  if (!ctx) {
+    throw new Error('useDiscount must be used within a DiscountProvider');
+  }
+  const { value, status, message, isLoading, applyDiscount, clearDiscount } = ctx;
+  const discount = useMemo<DiscountState>(
+    () => ({ value, status, message }),
+    [value, status, message]
   );
-
-  return { discount, isLoading, applyDiscount };
+  return { discount, isLoading, applyDiscount, clearDiscount };
 }

@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { IoCheckmarkCircleOutline } from 'react-icons/io5';
+import { useModalBehavior } from '../../../hooks/useModalBehavior';
 
 export interface CheckoutConfirmationModalProps {
   isOpen: boolean;
@@ -8,6 +9,8 @@ export interface CheckoutConfirmationModalProps {
 
 const CheckoutConfirmationModal: React.FC<CheckoutConfirmationModalProps> = ({ isOpen, onClose }) => {
   const modalRef = useRef<HTMLDivElement>(null);
+
+  useModalBehavior({ isOpen, onClose, ref: modalRef });
 
   useEffect(() => {
     if (!isOpen) return;
@@ -26,9 +29,13 @@ const CheckoutConfirmationModal: React.FC<CheckoutConfirmationModalProps> = ({ i
 
   return (
     <ModalOverlay>
-      <div 
-        ref={modalRef} 
-        className="bg-white p-10 max-w-[400px] w-full mx-auto shadow-xl text-center rounded-sm animate-modalEntry"
+      <div
+        ref={modalRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="checkout-confirm-title"
+        tabIndex={-1}
+        className="bg-white p-10 max-w-[400px] w-full mx-auto shadow-xl text-center rounded-sm animate-modalEntry outline-none"
       >
         <div className="relative w-16 h-16 mx-auto mb-6">
           <div className="absolute inset-0 bg-primary/10 rounded-full animate-pulse" />
@@ -36,7 +43,7 @@ const CheckoutConfirmationModal: React.FC<CheckoutConfirmationModalProps> = ({ i
             <IoCheckmarkCircleOutline className="text-primary text-5xl" />
           </div>
         </div>
-        <h2 className="font-cardo text-3xl font-black text-primary mb-4">Order Confirmed</h2>
+        <h2 id="checkout-confirm-title" className="font-cardo text-3xl font-black text-primary mb-4">Order Confirmed</h2>
         <div className="space-y-3 mb-8">
           <p className="text-text/80 font-light">
             Your order has been confirmed & it is on the way.

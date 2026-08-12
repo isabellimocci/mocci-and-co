@@ -8,6 +8,9 @@ import CheckoutForm from '../components/features/checkout/CheckoutForm.tsx';
 import PaymentForm from '../components/features/payment/PaymentForm.tsx';
 import CheckoutConfirmationModal from '../components/features/checkout/CheckoutConfirmationModal.tsx';
 import { useCart } from '../hooks/useCart';
+import { calculateOrderTotal, getShippingCost, GIFT_WRAP_COST } from '../utils/order.utils';
+import GiftOptions from '../components/features/checkout/GiftOptions';
+import Seo from '../components/common/Seo';
 
 const getShippingMethod = (method: string) => (method === 'express' ? 'express' : 'standard');
 
@@ -30,19 +33,33 @@ const CheckoutPage: React.FC = () => {
     goToPreviousStep,
     finalizePurchase,
     closeConfirmationModal,
+    giftOptions,
+    setGiftOptions,
   } = useCheckoutState();
-  const { discount, isLoading: isDiscountLoading, applyDiscount } = useDiscount(subtotal);
+  const { discount, isLoading: isDiscountLoading, applyDiscount } = useDiscount();
+
+  const shippingMethod = getShippingMethod(shippingDetails.shippingMethod);
+  const shippingCost = getShippingCost(shippingMethod);
+  const giftWrapCost = giftOptions.giftWrap ? GIFT_WRAP_COST : 0;
+  const finalTotal = calculateOrderTotal({
+    subtotal,
+    discount: discount.value,
+    shipping: shippingCost,
+    extras: giftWrapCost,
+  });
 
   return (
     <div className="w-full min-h-[80vh] flex flex-col items-center lg:mt-16">
+      <Seo title="Checkout" description="Secure checkout at Mocci & Co." path="/checkout" noIndex />
       <div className="flex flex-col lg:flex-row-reverse gap-0 lg:gap-16 flex-1 justify-center w-full max-w-[1920px] px-0 md:px-4 lg:px-8">
         <div className="w-full lg:w-[550px] p-4 lg:p-4 mb-0">
           <CheckoutSummary
             items={cartItems}
             subtotal={subtotal}
-            shippingMethod={getShippingMethod(shippingDetails.shippingMethod)}
+            shippingMethod={shippingMethod}
             totalUnits={getTotalUnits(cartItems)}
             discount={discount.value}
+            giftWrapCost={giftWrapCost}
             discountForm={step === 'shipping' ? (
               <DiscountForm
                 onApply={applyDiscount}
@@ -71,7 +88,7 @@ const CheckoutPage: React.FC = () => {
               onFinalize={finalizePurchase}
               loading={isLoading}
               error={error}
-              totalAmount={subtotal}
+              totalAmount={finalTotal}
               shippingDetails={{
                 name: `${shippingDetails.firstName} ${shippingDetails.lastName}`,
                 address: shippingDetails.address,
@@ -79,6 +96,7 @@ const CheckoutPage: React.FC = () => {
                 zip: shippingDetails.zipCode,
                 phone: shippingDetails.phone ?? ''
               }}
+              giftOptionsSlot={<GiftOptions value={giftOptions} onChange={setGiftOptions} />}
             />
           )}
         </div>

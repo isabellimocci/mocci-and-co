@@ -20,6 +20,7 @@ const PaymentInput: React.FC<PaymentInputProps> = ({
   icon,
 }) => (
   <div className='flex flex-col relative'>
+    <label htmlFor={id} className='sr-only'>{placeholder}</label>
     <input
       type='text'
       id={id}
@@ -29,6 +30,7 @@ const PaymentInput: React.FC<PaymentInputProps> = ({
       placeholder={placeholder}
       className={`px-3 py-2 border-0 border-b border-secondary bg-transparent focus:outline-none focus:border-primary transition-colors placeholder:text-text/70 placeholder:text-base${icon ? ' pr-10' : ''}`}
       required={required}
+      aria-required={required || undefined}
     />
     {icon}
   </div>

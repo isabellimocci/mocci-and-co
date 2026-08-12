@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from './useCart';
@@ -24,14 +24,20 @@ export interface PaymentDetails {
 
 type CheckoutStep = 'shipping' | 'payment' | 'confirmation';
 
+export interface GiftOptions {
+  giftWrap: boolean;
+  giftMessage: string;
+}
+
 interface UseCheckoutState {
   step: CheckoutStep;
   shippingDetails: ShippingDetails;
   setShippingDetails: Dispatch<SetStateAction<ShippingDetails>>;
   paymentDetails: PaymentDetails;
   setPaymentDetails: Dispatch<SetStateAction<PaymentDetails>>;
+  giftOptions: GiftOptions;
+  setGiftOptions: Dispatch<SetStateAction<GiftOptions>>;
   subtotal: number;
-  total: number;
   isLoading: boolean;
   error: string | null;
   isConfirmationModalOpen: boolean;
@@ -60,6 +66,11 @@ const INITIAL_PAYMENT_DETAILS: PaymentDetails = {
   cvv: '',
 };
 
+const INITIAL_GIFT_OPTIONS: GiftOptions = {
+  giftWrap: false,
+  giftMessage: '',
+};
+
 
 export function useCheckoutState(): UseCheckoutState {
   const { getCartTotal, clearCart } = useCart();
@@ -68,12 +79,20 @@ export function useCheckoutState(): UseCheckoutState {
   const [step, setStep] = useState<CheckoutStep>('shipping');
   const [shippingDetails, setShippingDetails] = useState<ShippingDetails>(INITIAL_SHIPPING_DETAILS);
   const [paymentDetails, setPaymentDetails] = useState<PaymentDetails>(INITIAL_PAYMENT_DETAILS);
+  const [giftOptions, setGiftOptions] = useState<GiftOptions>(INITIAL_GIFT_OPTIONS);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
 
+  const mountedRef = useRef(true);
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
   const subtotal = getCartTotal();
-  const total = subtotal;
 
   const goToNextStep = useCallback(() => {
     if (step === 'shipping') {
@@ -94,15 +113,17 @@ export function useCheckoutState(): UseCheckoutState {
       await new Promise(resolve => setTimeout(resolve, 1500));
 
       clearCart();
+      if (!mountedRef.current) return;
       setIsConfirmationModalOpen(true);
     } catch (err) {
+      if (!mountedRef.current) return;
       setError(
         err instanceof Error
           ? err.message
           : 'An error occurred while processing your payment. Please try again.'
       );
     } finally {
-      setIsLoading(false);
+      if (mountedRef.current) setIsLoading(false);
     }
   }, [clearCart]);
 
@@ -117,8 +138,9 @@ export function useCheckoutState(): UseCheckoutState {
     setShippingDetails,
     paymentDetails,
     setPaymentDetails,
+    giftOptions,
+    setGiftOptions,
     subtotal,
-    total,
     isLoading,
     error,
     isConfirmationModalOpen,

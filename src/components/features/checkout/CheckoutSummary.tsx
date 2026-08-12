@@ -1,35 +1,20 @@
 import React, { memo } from "react";
 import type { CartItem as CartItemType } from "../../../context/CartProvider";
-
-type ShippingMethod = "standard" | "express";
+import { formatCurrency } from "../../../utils/currency.utils";
+import { calculateOrderTotal, getShippingCost, type ShippingMethod } from "../../../utils/order.utils";
 
 interface CheckoutSummaryProps {
   items: CartItemType[];
   subtotal: number;
   shippingMethod: ShippingMethod;
   discount?: number;
+  giftWrapCost?: number;
   totalUnits: number;
   discountForm?: React.ReactNode;
 }
 
-const CURRENCY_SYMBOL = "$";
-const EXPRESS_SHIPPING_COST = 10;
-
-function formatCurrency(value: number): string {
-  if (isNaN(value)) return `${CURRENCY_SYMBOL}0.00`;
-  return `${CURRENCY_SYMBOL}${value.toFixed(2)}`;
-}
-
-function getShippingCost(method: ShippingMethod): number {
-  return method === "express" ? EXPRESS_SHIPPING_COST : 0;
-}
-
 function getShippingLabel(method: ShippingMethod): string {
   return method === "express" ? "Express" : "Standard";
-}
-
-function calculateTotal(subtotal: number, discount: number, shippingCost: number): number {
-  return subtotal - discount + shippingCost;
 }
 
 const CheckoutItem: React.FC<{ item: CartItemType }> = memo(({ item }) => {
@@ -56,14 +41,14 @@ const CheckoutItem: React.FC<{ item: CartItemType }> = memo(({ item }) => {
 });
 
 const CheckoutSummary: React.FC<CheckoutSummaryProps> = memo(
-  ({ items, subtotal, shippingMethod, discount = 0, totalUnits, discountForm }) => {
+  ({ items, subtotal, shippingMethod, discount = 0, giftWrapCost = 0, totalUnits, discountForm }) => {
     const shippingCost = getShippingCost(shippingMethod);
-    const total = calculateTotal(subtotal, discount, shippingCost);
+    const total = calculateOrderTotal({ subtotal, discount, shipping: shippingCost, extras: giftWrapCost });
 
     return (
       <section className="bg-white/20 p-6" aria-label="Order Summary">
         <header>
-          <h2 className="font-cardo font-bold text-primary text-2xl mb-8">Order Summary</h2>
+          <h2 className="font-cardo font-bold text-primary text-2xl sm:text-3xl mb-8">Order Summary</h2>
         </header>
         <div className="space-y-4 mb-4 border-b border-secondary pb-4">
           {items.map((item) => (
@@ -81,6 +66,12 @@ const CheckoutSummary: React.FC<CheckoutSummaryProps> = memo(
             <span>Shipping ({getShippingLabel(shippingMethod)})</span>
             <span>{shippingCost === 0 ? "FREE" : formatCurrency(shippingCost)}</span>
           </div>
+          {giftWrapCost > 0 && (
+            <div className="flex justify-between">
+              <span>Gift wrap</span>
+              <span>{formatCurrency(giftWrapCost)}</span>
+            </div>
+          )}
           <div className="flex justify-between italic">
             <span>Discount</span>
             <span>-{formatCurrency(discount)}</span>
