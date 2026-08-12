@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import FavoriteButton from '../../common/buttons/FavoriteButton';
 import type { ProductCardProps } from '../../../types/productCard.types';
+import { formatCurrency } from '../../../utils/currency.utils';
 import {
   CARD_CLASS,
   IMAGE_WRAPPER_CLASS,
@@ -29,18 +30,17 @@ const ProductImage: React.FC<ProductImageProps> = ({ src, alt, link }) => (
 interface ProductContentProps {
   name: string;
   price: number;
-  currency: string;
   link: string;
   actionLabel: string;
 }
 
-const ProductContent: React.FC<ProductContentProps> = ({ name, price, currency, link, actionLabel }) => (
+const ProductContent: React.FC<ProductContentProps> = ({ name, price, link, actionLabel }) => (
   <div className={CONTENT_CLASS}>
     <div>
       <Link to={link}>
         <h3 className={`${TITLE_CLASS} cursor-pointer`}>{name}</h3>
       </Link>
-      <p className={PRICE_CLASS}>{currency} {Number(price).toFixed(2)}</p>
+      <p className={PRICE_CLASS}>{formatCurrency(price)}</p>
     </div>
     <Link to={link} className={LINK_CLASS}>
       {actionLabel}
@@ -65,7 +65,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavoriteClick, isF
       <ProductContent
         name={product.name}
         price={product.price}
-        currency={product.currency}
         link={productLink}
         actionLabel={actionLabel}
       />

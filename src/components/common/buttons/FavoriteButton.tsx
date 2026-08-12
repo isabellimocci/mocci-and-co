@@ -65,16 +65,13 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ isFavorite = false, onC
   const [heartRef, triggerPop] = usePopAnimation();
 
   const handleClick = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
-    try {
-      event.currentTarget.classList.add('animate-ping-heart');
-      setTimeout(() => {
-        event.currentTarget.classList.remove('animate-ping-heart');
-      }, 400);
-      if (onClick) onClick();
-      triggerPop();
-    } catch {
-      // handle error
-    }
+    const button = event.currentTarget;
+    button.classList.add('animate-ping-heart');
+    window.setTimeout(() => {
+      button.classList.remove('animate-ping-heart');
+    }, 400);
+    if (onClick) onClick();
+    triggerPop();
   }, [onClick, triggerPop]);
 
   const ariaLabel = getAriaLabel(isFavorite, label);

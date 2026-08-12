@@ -43,7 +43,7 @@ function createProduct({
   rating,
   color,
   link,
-  currency = 'USD',
+  currency = 'BRL',
 }: Omit<Product, 'currency'> & { currency?: string }): Product {
   return {
     id,

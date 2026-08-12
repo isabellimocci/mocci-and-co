@@ -9,7 +9,6 @@ interface ProductHeaderProps {
   reviewsCount: number;
   price: number;
   discountPrice?: number;
-  currency: string;
 }
 
 const ProductHeader = memo(function ProductHeader({
@@ -19,7 +18,6 @@ const ProductHeader = memo(function ProductHeader({
   reviewsCount,
   price,
   discountPrice,
-  currency
 }: ProductHeaderProps) {
   return (
     <>
@@ -48,7 +46,6 @@ const ProductHeader = memo(function ProductHeader({
         <PriceDisplay
           price={price}
           discountPrice={discountPrice}
-          currency={currency}
         />
       </div>
     </>

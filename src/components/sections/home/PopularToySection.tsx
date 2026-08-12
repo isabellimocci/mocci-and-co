@@ -13,7 +13,7 @@ const POPULAR_TOYS: Product[] = [
     id: '5',
     name: 'Cat Violet',
     price: 178,
-    currency: 'USD',
+    currency: 'BRL',
     images: [catVioletImg],
     description: [
       'Pink fairycore cat with a violet ribbon.',
@@ -35,7 +35,7 @@ const POPULAR_TOYS: Product[] = [
     id: '19',
     name: 'Sheep Margot',
     price: 185,
-    currency: 'USD',
+    currency: 'BRL',
     images: [sheepMargotImg],
     description: [
       'White sheep plush with soft wool and farmcore style.',
@@ -57,7 +57,7 @@ const POPULAR_TOYS: Product[] = [
     id: '3',
     name: 'Bunny Fleur de Lis',
     price: 192,
-    currency: 'USD',
+    currency: 'BRL',
     images: [bunnyFleurDeLisImg],
     description: [
       'Beige bunny with a fleur de lis motif, cottagecore charm.',
@@ -79,7 +79,7 @@ const POPULAR_TOYS: Product[] = [
     id: '7',
     name: 'Cow Daisy',
     price: 172,
-    currency: 'USD',
+    currency: 'BRL',
     images: [cowDaisyImg],
     description: [
       'Black and white cow plush with daisy embroidery.',

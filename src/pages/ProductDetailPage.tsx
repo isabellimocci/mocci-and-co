@@ -11,11 +11,11 @@ import ProductActions from '../components/features/product/ProductActions';
 import formatDescription from '../utils/formatDescription.utils';
 import ProductImages from '../components/features/product/ProductImages';
 import ProductMainImage from '../components/features/product/ProductMainImage';
-import MobileImageGallery from '../components/features/product/MobileImageGallery';
 import ProductHeader from '../components/features/product/ProductHeader';
 import ReviewsSection from '../components/sections/product/ReviewsSection';
 import RecommendedProducts from '../components/sections/product/RecommendedProducts';
 import type { Product } from '../models/product.model';
+import Seo, { SITE_URL } from '../components/common/Seo';
 
 
 function ProductDetailPage() {
@@ -46,8 +46,44 @@ function ProductDetailPage() {
     );
   }
 
+  const seoImage = product.images?.[0];
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: seoImage ? [`${SITE_URL}${seoImage}`] : undefined,
+    description: product.description.join(' '),
+    sku: product.id,
+    category: product.category,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: product.currency,
+      price: product.price,
+      availability:
+        product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+      url: `${SITE_URL}/products/${product.id}`,
+    },
+    ...(product.reviewsCount > 0
+      ? {
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: product.rating,
+            reviewCount: product.reviewsCount,
+          },
+        }
+      : {}),
+  };
+
   return (
     <div className='w-full flex flex-col items-center'>
+      <Seo
+        title={product.name}
+        description={product.description.join(' ')}
+        path={`/products/${product.id}`}
+        image={seoImage}
+        type="product"
+        jsonLd={productJsonLd}
+      />
       <div className='container mx-auto px-4 py-8 lg:py-12 max-w-7xl'>
         <div className='grid grid-cols-1 lg:grid-cols-12 gap-8'>
           <div
@@ -69,13 +105,6 @@ function ProductDetailPage() {
                   alt={product.name}
                 />
               </div>
-              {product.images && (
-                <MobileImageGallery
-                  images={product.images}
-                  selectedImage={selectedImage}
-                  onImageChange={setSelectedImage}
-                />
-              )}
             </div>
           </div>
 
@@ -87,7 +116,6 @@ function ProductDetailPage() {
               reviewsCount={product.reviewsCount}
               price={product.price}
               discountPrice={product.discountPrice}
-              currency={product.currency}
             />
 
             <ProductActions

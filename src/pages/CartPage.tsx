@@ -4,6 +4,7 @@ import OrderSummary from '../components/common/OrderSummary';
 import EmptyCart from '../components/features/cart/EmptyCart';
 import DiscountForm from '../components/common/form/DiscountForm';
 import { useCartPageState } from '../hooks/useCartPageState';
+import Seo from '../components/common/Seo';
 
 const CartPage: React.FC = () => {
   const {
@@ -25,8 +26,8 @@ const CartPage: React.FC = () => {
   const renderCartItems = useCallback(() => {
     return (
       <div className="w-full lg:w-3/4 xl:w-4/5 flex flex-col h-full">
-        <h1 className="font-cardo text-3xl font-black text-primary mb-6">Shopping Cart</h1>
-        <div className="border-b border-t border-secondary p-4">
+        <h1 className="font-cardo text-2xl sm:text-3xl font-black text-primary mb-6 break-words">Shopping Cart</h1>
+        <div className="border-b border-t border-secondary p-2 sm:p-4">
           {cartItems.map(item => (
             <CartItem
               key={item.id}
@@ -35,6 +36,7 @@ const CartPage: React.FC = () => {
               image={item.image}
               price={item.price}
               quantity={item.quantity}
+              stock={item.stock}
               onRemove={handleRemove}
               onQuantityChange={handleQuantityChange}
               loading={loadingRemove === item.id}
@@ -77,8 +79,9 @@ const CartPage: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto px-6 md:px-32 pt-16 pb-2 lg:pt-28 lg:pb-4 max-w-[98vw] min-h-[80vh] flex flex-col justify-start">
-      <div className="flex flex-col lg:flex-row gap-16 flex-1">
+    <div className="container mx-auto px-4 sm:px-6 md:px-32 pt-16 pb-2 lg:pt-28 lg:pb-4 max-w-[98vw] min-h-[80vh] flex flex-col justify-start">
+      <Seo title="Cart" description="Your shopping cart at Mocci & Co." path="/cart" noIndex />
+      <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 flex-1">
         {renderCartItems()}
         {renderOrderSummary()}
       </div>

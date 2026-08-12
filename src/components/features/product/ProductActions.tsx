@@ -10,7 +10,7 @@ export interface ProductActionsProps {
   setQuantity: (quantity: number) => void;
   stock: number;
   isFavorite: boolean;
-  onAddToCart: () => void;
+  onAddToCart: () => boolean;
   onToggleFavorite: () => void;
   buyLabel?: string;
   addToCartLabel?: string;
@@ -45,8 +45,9 @@ const ProductActions: React.FC<ProductActionsProps> = ({
 
   const handleAddToCart = React.useCallback(() => {
     try {
-      onAddToCart();
-      notify(DEFAULT_LABELS.addToCartSuccess, 'success');
+      if (onAddToCart()) {
+        notify(DEFAULT_LABELS.addToCartSuccess, 'success');
+      }
     } catch {
       notify(DEFAULT_LABELS.addToCartError, 'error');
     }
@@ -54,8 +55,9 @@ const ProductActions: React.FC<ProductActionsProps> = ({
 
   const handleBuyItNow = React.useCallback(() => {
     try {
-      onAddToCart();
-      navigate('/checkout');
+      if (onAddToCart()) {
+        navigate('/checkout');
+      }
     } catch {
       notify(DEFAULT_LABELS.addToCartError, 'error');
     }
