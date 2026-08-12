@@ -1,11 +1,13 @@
 import PRIVACY_POLICY from '../data/privacyPolicy.data';
 import { LazySection, Section } from '../components/sections/policy/PolicySection';
+import Seo from '../components/common/Seo';
 
 const PrivacyPolicyPage = () => (
   <article
     className='py-8'
     aria-label='Privacy Policy'
   >
+    <Seo title="Privacy Policy" description="How Mocci & Co. collects, uses and protects your data." path="/privacy-policy" />
     <div className='container mx-auto px-4 max-w-4xl'>
       <h1 className='font-cardo text-2xl md:text-3xl lg:text-4xl font-black text-primary m-6 lg:m-10 uppercase text-center'>
         {PRIVACY_POLICY.title}

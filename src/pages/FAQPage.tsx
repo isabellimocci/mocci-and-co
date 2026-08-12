@@ -1,6 +1,7 @@
 import React, { useState, memo, useCallback } from 'react';
 import { FAQ_CONTENT } from '../data/faqPage.data';
 import type { FaqItem } from '../data/faqPage.data';
+import Seo from '../components/common/Seo';
 
 function generateFaqId(question: string) {
   return `faq-answer-${question.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase()}`;
@@ -58,8 +59,24 @@ const FAQPage: React.FC = () => {
     setOpenIndex((prev) => (prev === index ? null : index));
   }, []);
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQ_CONTENT.items.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: { '@type': 'Answer', text: item.answer.join(' ') },
+    })),
+  };
+
   return (
     <article className="py-8" aria-label="Frequently Asked Questions">
+      <Seo
+        title="FAQ"
+        description="Answers to common questions about Mocci & Co. handmade plush toys, shipping and returns."
+        path="/faq"
+        jsonLd={faqJsonLd}
+      />
       <div className="container mx-auto px-4 max-w-4xl">
         <h1 className="font-cardo text-2xl md:text-3xl lg:text-4xl font-black text-primary m-6 lg:m-10 uppercase text-center">
           {FAQ_CONTENT.title}

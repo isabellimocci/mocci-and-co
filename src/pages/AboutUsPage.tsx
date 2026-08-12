@@ -1,4 +1,5 @@
 import { ABOUT_CONTENT } from '../data/aboutUsPage.data';
+import Seo from '../components/common/Seo';
 
 const TITLE_CLASS = 'font-cardo text-2xl md:text-3xl lg:text-4xl font-black text-primary m-6 lg:m-10 uppercase text-center';
 const INTRO_TEXT_CLASS = 'text-text/80 text-xs md:text-sm lg:text-lg text-center mb-8 md:max-w-lg md:mx-auto lg:max-w-3xl';
@@ -28,6 +29,11 @@ const SquareImage: React.FC<SquareImageProps> = ({ src, alt }) => (
 
 const AboutUsPage: React.FC = () => (
   <article className='' aria-label='Our Story'>
+    <Seo
+      title="About Us"
+      description="The story behind Mocci & Co. — handcrafted plush toys made with love."
+      path="/about"
+    />
     <div className='pt-8 container mx-auto px-4 max-w-4xl flex flex-col'>
       <h1 className={TITLE_CLASS}>{ABOUT_CONTENT.title}</h1>
       <p className={INTRO_TEXT_CLASS}>{ABOUT_CONTENT.intro}</p>
