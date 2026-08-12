@@ -1,8 +1,6 @@
 import type { PriceRange, SortOption } from './productFilters.types';
 
 export interface FilterControlsProps {
-  searchTerm: string;
-  setSearchTerm: (value: string) => void;
   categories: string[];
   selectedCategory: string;
   setSelectedCategory: (value: string) => void;

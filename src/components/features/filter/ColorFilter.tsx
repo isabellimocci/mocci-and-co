@@ -9,7 +9,7 @@ const ColorTagButton = React.memo(({ opt, selected, onClick }: { opt: DropdownOp
       return { backgroundColor: (option as { color: string }).color };
     }
     const colorMap: Record<string, string> = {
-      Red: '#ef4444', Blue: '#3b82f6', Green: '#22c55e', Yellow: '#eab308', Pink: '#ec4899', Purple: '#a21caf', Orange: '#f59e42', Black: '#222', White: '#fff', Gray: '#7b7280', Brown: '#a16207', Beige: '#f5f5dc',
+      Red: '#ef4444', Blue: '#3b82f6', Green: '#22c55e', Yellow: '#eab308', Pink: '#ec4899', Purple: '#a21caf', Orange: '#f59e42', Black: '#222', White: '#fff', Gray: '#7b7280', Grey: '#7b7280', Brown: '#a16207', Beige: '#f5f5dc',
     };
     return { backgroundColor: colorMap[option.label] || '#e5e7eb' };
   };

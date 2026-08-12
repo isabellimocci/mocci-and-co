@@ -1,17 +1,37 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import ProductList from '../components/features/product/ProductList';
 import { products } from '../data/productsDetails.data';
-import { priceRanges, sortOptions } from '../data/products.data';
+import { priceRanges, sortOptions, categories } from '../data/products.data';
 import { getUniqueValues } from '../utils/productFilters.utils';
 import { useProductFilters } from '../hooks/useProductFilters';
 import { useFavorites } from '../hooks/useFavoritesHooks';
 import FilterControls from '../components/features/filter/FilterControls';
 import SidebarFilter from '../components/features/filter/SidebarFilter';
+import Seo, { SITE_URL } from '../components/common/Seo';
+
+const slugify = (value: string) => value.toLowerCase().replace(/\s+/g, '-');
+
+const categoryFromSlug = (slug: string | null): string => {
+  if (!slug) return 'All';
+  return categories.find(category => slugify(category) === slug) ?? 'All';
+};
+
+const PRODUCTS_JSONLD = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+    { '@type': 'ListItem', position: 2, name: 'Products', item: `${SITE_URL}/products` },
+  ],
+};
 
 const ProductsPage: React.FC = () => {
+  const [searchParams] = useSearchParams();
+  const initialCategory = categoryFromSlug(searchParams.get('category'));
+  const initialSearch = searchParams.get('search') ?? '';
+
   const {
-    searchTerm,
-    setSearchTerm,
     selectedCategory,
     setSelectedCategory,
     selectedPriceRange,
@@ -21,15 +41,21 @@ const ProductsPage: React.FC = () => {
     sortBy,
     setSortBy,
     filteredProducts,
-  } = useProductFilters(products, priceRanges);
+  } = useProductFilters(products, priceRanges, initialCategory, initialSearch);
 
   const { toggleFavorite, isFavorite } = useFavorites();
 
-  const productCategories = getUniqueValues(products, 'category');
-  const productColors = getUniqueValues(products, 'color');
+  const productCategories = React.useMemo(() => getUniqueValues(products, 'category'), []);
+  const productColors = React.useMemo(() => getUniqueValues(products, 'color'), []);
 
   return (
     <div className='py-8'>
+      <Seo
+        title="Our Collection"
+        description="Browse the full collection of handmade plush toys by Mocci & Co."
+        path="/products"
+        jsonLd={PRODUCTS_JSONLD}
+      />
       <div className='container mx-auto px-4'>
         <h1 className='font-cardo text-2xl md:text-3xl lg:text-4xl font-black text-center text-primary m-6 lg:m-10 uppercase'>
           Our Collection
@@ -49,8 +75,6 @@ const ProductsPage: React.FC = () => {
 
         <div className='mb-8 block lg:hidden'>
           <SidebarFilter
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
             categories={productCategories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}
@@ -69,8 +93,6 @@ const ProductsPage: React.FC = () => {
 
         <div className='mb-8 hidden lg:flex'>
           <FilterControls
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
             categories={productCategories}
             selectedCategory={selectedCategory}
             setSelectedCategory={setSelectedCategory}

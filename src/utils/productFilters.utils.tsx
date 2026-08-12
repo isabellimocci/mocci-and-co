@@ -24,7 +24,7 @@ export function getColorDropdownOptions(colors: string[]): DropdownOption[] {
       ) : null,
   }));
 }
-import type { PriceRange, SortOption } from '../types/productFilters.types';
+import type { PriceRange } from '../types/productFilters.types';
 import type { Product } from '../models/product.model';
 
 export function getUniqueValues<T>(arr: T[], key: keyof T): string[] {
@@ -60,19 +60,9 @@ export function filterProducts(
   selectedColor: string,
   priceRanges: PriceRange[]
 ): Product[] {
-  const defaultPriceRange = priceRanges[0];
-  const sliderValue = Number(selectedPriceRangeLabel);
-  let matchesPriceFn: (product: Product) => boolean;
-  if (!isNaN(sliderValue) && sliderValue > 0) {
-    matchesPriceFn = (product: Product) => product.price >= sliderValue;
-  } else {
-    const selectedRange =
-      priceRanges.find(range => range.label === selectedPriceRangeLabel) ||
-      defaultPriceRange;
-    matchesPriceFn = (product: Product) =>
-      product.price >= selectedRange.min &&
-      product.price <= selectedRange.max;
-  }
+  const selectedRange =
+    priceRanges.find(range => range.label === selectedPriceRangeLabel) ||
+    priceRanges[0];
 
   return products.filter(product => {
     const matchesSearch =
@@ -80,21 +70,14 @@ export function filterProducts(
       product.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory =
       selectedCategory === 'All' || product.category === selectedCategory;
-    const matchesPrice = matchesPriceFn(product);
+    const matchesPrice =
+      product.price >= selectedRange.min && product.price <= selectedRange.max;
     const matchesColor =
       selectedColor === 'All' || product.color === selectedColor;
 
     return matchesSearch && matchesCategory && matchesPrice && matchesColor;
   });
 }
-
-export const sortOptions: SortOption[] = [
-  { label: 'Best Selling', value: 'best-selling' },
-  { label: 'Price: Low to High', value: 'price-asc' },
-  { label: 'Price: High to Low', value: 'price-desc' },
-  { label: 'Name: A-Z', value: 'name-asc' },
-  { label: 'Name: Z-A', value: 'name-desc' },
-];
 
 export function sortProducts(products: Product[], sortBy: string): Product[] {
   const sortedProducts = [...products];

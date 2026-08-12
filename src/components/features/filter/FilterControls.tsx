@@ -1,12 +1,9 @@
 import React from 'react';
 import { useFilterOptions } from '../../../hooks/useFilterOptions';
 import type { FilterControlsProps } from '../../../types/filterControls.types';
-import { INPUT_CLASS } from '../../../styles/input.styles';
-import { CategoryFilter, ColorFilter, PriceFilter, SortFilter, FilterField, SearchField } from '.';
+import { CategoryFilter, ColorFilter, PriceFilter, SortFilter, FilterField } from '.';
 
-const FilterControls: React.FC<FilterControlsProps & { hideSearchOnMobileTablet?: boolean }> = ({
-  searchTerm,
-  setSearchTerm,
+const FilterControls: React.FC<FilterControlsProps> = ({
   categories,
   selectedCategory,
   setSelectedCategory,
@@ -21,7 +18,6 @@ const FilterControls: React.FC<FilterControlsProps & { hideSearchOnMobileTablet?
   sortOptions,
   onClose,
   productCount,
-  hideSearchOnMobileTablet
 }) => {
   const { categoryOptions, priceRangeOptions, colorDropdownOptions } = useFilterOptions({ categories, priceRanges, colors });
 
@@ -39,16 +35,11 @@ const FilterControls: React.FC<FilterControlsProps & { hideSearchOnMobileTablet?
           </button>
         )}
         <div className='flex flex-col gap-8 max-w-2xl mx-auto'>
-          {!hideSearchOnMobileTablet && (
-            <FilterField label='Search:' id='search-mobile'>
-              <SearchField value={searchTerm} onChange={setSearchTerm} id='search-mobile' className={INPUT_CLASS + ' focus:border-b-2 focus:border-primary w-full'} />
-            </FilterField>
-          )}
           <FilterField label='Category:' id='category-mobile'>
             <CategoryFilter options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} className='w-full' />
           </FilterField>
           <FilterField label='Price:' id='price-mobile'>
-            <PriceFilter value={selectedPriceRange} onChange={setSelectedPriceRange} className='w-full' asSlider={true} />
+            <PriceFilter options={priceRangeOptions} value={selectedPriceRange} onChange={setSelectedPriceRange} className='w-full' />
           </FilterField>
           <FilterField label='Color:' id='color-mobile'>
             <ColorFilter options={colorDropdownOptions} value={selectedColor} onChange={setSelectedColor} className='w-full' asTags={true} />
@@ -58,20 +49,18 @@ const FilterControls: React.FC<FilterControlsProps & { hideSearchOnMobileTablet?
           </FilterField>
         </div>
       </div>
-      <div className='hidden lg:flex flex-row items-center mb-6 gap-6 w-full'>
-        <div className='flex flex-wrap items-center gap-5 flex-grow'>
-          <span className='text-sm font-normal text-text tracking-tight'>Search:</span>
-          <SearchField value={searchTerm} onChange={setSearchTerm} />
+      <div className='hidden lg:flex flex-wrap items-center gap-x-6 gap-y-4 mb-6 w-full'>
+        <div className='flex flex-wrap items-center gap-4'>
           <span className='text-sm font-normal text-text tracking-tight'>Filter:</span>
           <CategoryFilter options={categoryOptions} value={selectedCategory} onChange={setSelectedCategory} />
           <PriceFilter options={priceRangeOptions} value={selectedPriceRange} onChange={setSelectedPriceRange} />
           <ColorFilter options={colorDropdownOptions} value={selectedColor} onChange={setSelectedColor} />
         </div>
-        <div className='flex items-center gap-5 justify-end w-full lg:w-auto'>
+        <div className='flex items-center gap-2 ml-auto'>
           <span className='text-sm font-normal text-text tracking-tight'>Sort by:</span>
           <SortFilter options={sortOptions} value={sortBy} onChange={setSortBy} />
-          <span className='text-sm font-normal text-text tracking-tight'>{productCount} products</span>
         </div>
+        <span className='text-sm font-normal text-text/70 tracking-tight whitespace-nowrap'>{productCount} products</span>
       </div>
     </>
   );

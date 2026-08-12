@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PiSortAscendingThin, PiListHeartLight } from 'react-icons/pi';
+import { useModalBehavior } from '../../../hooks/useModalBehavior';
 import FilterControls from './FilterControls';
 import type { FilterControlsProps } from '../../../types/filterControls.types';
 
@@ -13,6 +14,7 @@ const BUTTON_CLASS = `
 function SidebarFilter(props: SidebarFilterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const asideRef = React.useRef<HTMLDivElement>(null);
+  useModalBehavior({ isOpen, onClose: () => setIsOpen(false), ref: asideRef });
   const OVERLAY_CLASS = 'fixed inset-0 bg-black/40 z-[1000]';
   const ASIDE_CLASS =
     'fixed top-0 right-0 h-full w-full max-w-md z-[1001] bg-[#f5f0ec] transition-all duration-300';
@@ -60,6 +62,7 @@ function SidebarFilter(props: SidebarFilterProps) {
         }
         tabIndex={-1}
         aria-modal={isOpen}
+        inert={!isOpen}
         role='dialog'
       >
         <div className='flex items-center justify-between gap-2 px-6 py-4 border-b border-primary/10 bg-[#f5f0ec]/95 rounded-tr-3xl'>
@@ -76,10 +79,7 @@ function SidebarFilter(props: SidebarFilterProps) {
           </div>
         </div>
         <div className='flex-1 overflow-y-auto px-6 py-4'>
-          <FilterControls
-            {...props}
-            hideSearchOnMobileTablet
-          />
+          <FilterControls {...props} />
         </div>
         <div className='sticky bottom-0 left-0 w-full bg-[#f5f0ec]/95 px-6 py-4 border-t border-primary/10 flex justify-center z-10'>
           <button

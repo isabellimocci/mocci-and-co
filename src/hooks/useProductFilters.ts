@@ -1,23 +1,35 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { Product } from '../models/product.model';
 import { filterProducts, sortProducts } from '../utils/productFilters.utils';
 import type { PriceRange } from '../types/productFilters.types';
+import { useDebouncedValue } from './useDebouncedValue';
 
 export function useProductFilters(
   allProducts: Product[],
-  availablePriceRanges: PriceRange[]
+  availablePriceRanges: PriceRange[],
+  initialCategory: string = 'All',
+  initialSearch: string = ''
 ) {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchTerm, setSearchTerm] = useState(initialSearch);
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [selectedPriceRange, setSelectedPriceRange] = useState('All');
   const [selectedColor, setSelectedColor] = useState('All');
   const [sortBy, setSortBy] = useState<string>('default');
+  const debouncedSearchTerm = useDebouncedValue(searchTerm, 250);
+
+  useEffect(() => {
+    setSelectedCategory(initialCategory);
+  }, [initialCategory]);
+
+  useEffect(() => {
+    setSearchTerm(initialSearch);
+  }, [initialSearch]);
 
   const filteredProducts = useMemo(
     () =>
       filterProducts(
         allProducts,
-        searchTerm,
+        debouncedSearchTerm,
         selectedCategory,
         selectedPriceRange,
         selectedColor,
@@ -25,7 +37,7 @@ export function useProductFilters(
       ),
     [
       allProducts,
-      searchTerm,
+      debouncedSearchTerm,
       selectedCategory,
       selectedPriceRange,
       selectedColor,
