@@ -1,5 +1,5 @@
 <div align="center">
-    <img width="1000" alt="Mocci & Co. Handwork banner: a fictional handmade plush toy store" src="https://github.com/user-attachments/assets/b2c0d955-027e-4c21-98e6-c13e2ff4034d" />
+    <img width="1000" alt="Mocci & Co. Handwork banner: a fictional handmade plush toy store" src="https://github.com/user-attachments/assets/d394221e-23de-4a9a-a3df-c0f805d51c60" />
   <br><br>
 
 ![React 19](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
@@ -62,14 +62,14 @@ O projeto cobre um fluxo realista de e-commerce, do início ao fim, no client: n
 - **Filtragem multi-critério**: filtre por categoria, cor e faixa de preço
 - **Busca por texto com debounce**: busca responsiva que evita refazer a filtragem a cada tecla digitada (`useDebouncedValue`)
 - **Ordenação dinâmica**: por preço (crescente/decrescente), nome (A-Z / Z-A) e mais vendidos
-- **Filtragem e ordenação memoizadas**: calculadas com `useMemo` para que os resultados sejam atualizados instantaneamente, sem trabalho desnecessário
+- **Filtragem e ordenação memoizadas**: calculadas com `useMemo` para que os resultados sejam atualizados instantaneamente
 - **UI de filtros responsiva**: sidebar e controles adaptados para mobile e desktop
 
 ### Experiência do Produto
 - **Galeria de imagens interativa** com transições suaves
 - **Carrossel otimizado para mobile** para navegação por toque
 - **Lightbox em tela cheia** via `yet-another-react-lightbox`
-- **Seção de produtos recomendados** ("Você também pode gostar")
+- **Seção de produtos recomendados** ("You Might Also Like")
 - **Avaliações e notas** com um componente de rating reutilizável
 - **Compartilhamento** usando a Web Share API, com fallback de cópia para a área de transferência
 
@@ -95,7 +95,7 @@ O projeto cobre um fluxo realista de e-commerce, do início ao fim, no client: n
 - **Páginas de conteúdo**: FAQ, Política de Privacidade e Envio & Devoluções
 
 ### SEO
-- **Metadata nativa do React 19**: `<title>`, meta description e link canônico por página, renderizados sem nenhuma biblioteca de terceiros (sem `react-helmet`)
+- **Metadata nativa do React 19**: `<title>`, meta description e link canônico por página, renderizados sem nenhuma biblioteca de terceiros
 - **Open Graph e Twitter Card**: tags completas de preview social (title, description, type, url, image) para compartilhamento de links enriquecido
 - **Dados estruturados (JSON-LD)**: blocos de schema injetados por página, com serialização segura contra XSS
 - **Controle de indexação**: `noindex` / `nofollow` opcionais por página
@@ -139,7 +139,7 @@ O projeto segue uma **arquitetura orientada a features e baseada em componentes*
 
 ```
 src/
-├── assets/        # Fontes, imagens, favicon
+├── assets/        # Fontes e imagens
 ├── components/
 │   ├── common/    # UI genérica (buttons, display, feedback, form, icons)
 │   ├── features/  # Componentes de feature (cart, checkout, payment, product, filter, contact)
@@ -221,11 +221,9 @@ A cobertura atual está focada no fluxo de checkout (renderização dos campos d
 
 Acessibilidade é uma preocupação de primeira classe neste projeto. A interface é construída com HTML semântico, controles operáveis via teclado e labels significativos, e a camada visual busca contraste de cor suficiente.
 
-> Para manter esta seção honesta e atualizada, rode uma auditoria (Lighthouse e/ou axe DevTools) contra o build publicado e registre os resultados abaixo.
-
-| Auditoria             | Nota |
-| ----------------- | ----- |
-| Lighthouse (a11y) | _rodar e preencher_ |
+| Auditoria             | Nota | Captura de tela |
+| ----------------- | ----- | ---- |
+| Lighthouse (a11y) | 97 | <img width="400" alt="image" src="https://github.com/user-attachments/assets/a6ac83ad-c7f6-4d5d-8978-74272bdcf999" /> |
 
 <br>
 
@@ -237,13 +235,11 @@ A performance é sustentada por:
 - **Filtragem e ordenação memoizadas** para evitar computação redundante
 - **Assets de imagem otimizados** para a vitrine e a mídia dos produtos
 
-> Os números do Lighthouse mudam a cada alteração relevante na UI. Rode novamente contra o deploy atual e atualize a tabela abaixo em vez de confiar em resultados antigos.
-
-| Métrica          | Nota |
-| --------------- | ----- |
-| Performance     | _rodar e preencher_ |
-| Best Practices  | _rodar e preencher_ |
-| SEO             | _rodar e preencher_ |
+| Métrica          | Nota | Captura de tela |
+| --------------- | ----- | ----------------------------------------------------------------------------------------------------------------- |
+| Performance     | 80 | <img width="400" alt="image" src="https://github.com/user-attachments/assets/de974273-6b00-46a0-9469-da0120c7d039" /> |
+| Best Practices  | 100 | <img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/95b48f14-1446-4ff7-a4ad-7acd6ef962db" /> |
+| SEO             | 100 | <img width="400" height="200" alt="image" src="https://github.com/user-attachments/assets/088561d4-f0d0-474d-b6b1-4ef6c43946ed" /> |
 
 <br>
 
@@ -253,17 +249,17 @@ Os clipes abaixo são animações em loop. Para uma versão não animada e total
 
 ### Desktop
 
-<div align="center">
+<!-- <div align="center">
   <img src="./public/desktop-demo.gif" alt="Animated walkthrough of the desktop store: browsing the plush toy catalog, filtering products, opening a product page, and adding an item to the cart">
-</div>
+</div> -->
 
 Tour pelo desktop: navegando pelo catálogo, filtrando produtos, abrindo uma página de produto e adicionando um item ao carrinho.
 
 ### Mobile
 
-<div align="center">
+<!-- <div align="center">
   <img src="./public/mobile-demo.gif" alt="Animated walkthrough of the mobile store: the responsive layout, mobile navigation, and adding a product to the cart" width="200px">
-</div>
+</div> -->
 
 Tour pelo mobile: o layout responsivo, a navegação mobile e a adição de um produto ao carrinho.
 
@@ -275,7 +271,6 @@ Tour pelo mobile: o layout responsivo, a navegação mobile e a adição de um p
 - [ ] **Autenticação de usuário**: contas, sessões e checkout protegido
 - [ ] **Estoque real**: estoque controlado pelo servidor, com disponibilidade ao vivo
 - [ ] **Persistência e histórico de pedidos**
-- [ ] **Cobertura de testes automatizados mais ampla** em hooks e lógica de negócio
 
 <br>
 
@@ -285,16 +280,15 @@ Tour pelo mobile: o layout responsivo, a navegação mobile e a adição de um p
 - **Pagamentos simulados**: o checkout completa um fluxo de pagamento falso, sem transações reais
 - **Ainda sem autenticação**: não há contas de usuário nesta versão
 - **Estoque apenas no client**: os níveis de estoque são estáticos e aplicados no navegador; não há inventário em tempo real
-- **Formulários apenas no client**: os formulários de contato e newsletter validam a entrada, mas ainda não a persistem nem a enviam, aguardando o backend
+- **Formulários apenas no client**: os formulários de contato e newsletter validam a entrada, mas não a persistem nem a enviam
 
 <br>
 
 ## Convenções
 
-- **Commits** seguem o padrão [Conventional Commits](https://www.conventionalcommits.org/) (`feat`, `fix`, `refactor`, `chore`, `docs`, `style`, `test`)
+- **Commits** seguem o padrão [Conventional Commits](https://www.conventionalcommits.org/)
 - **Componentes** usam nomes de arquivo em PascalCase; **hooks** seguem a convenção `useX`; **helpers puros** usam o sufixo `*.utils.ts` e **modelos de domínio** usam `*.model.ts`
 - **Path aliases** estão configurados no TypeScript e no Vite para imports mais limpos
-- **Sugestão de adição**: declarar uma versão suportada do Node no `package.json` por meio do campo `engines` (por exemplo, `"engines": { "node": ">=18" }`), para que contribuidores e CI usem um runtime compatível
 
 <br>
 
@@ -304,7 +298,7 @@ Tour pelo mobile: o layout responsivo, a navegação mobile e a adição de um p
 
 ## Licença e Direitos Autorais
 
-© 2025-2026 Isabelli Mocci. Todos os direitos reservados.
+© 2025-2026 Isabelli Mocci. All rights reserved.
 
 Este é um projeto pessoal de portfólio. O design, o código e o conceito não podem ser copiados, modificados ou distribuídos sem permissão.
 
