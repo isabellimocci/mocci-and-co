@@ -1,7 +1,7 @@
 import { HiOutlineHeart, HiOutlineShoppingBag } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../../hooks/useCart';
-import { useFavorites } from '../../../hooks/useFavoritesHooks';
+import { useFavorites } from '../../../hooks/useFavorites';
 
 type BadgeProps = {
   count: number;

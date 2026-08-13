@@ -6,7 +6,7 @@ import catVioletImg from '../../../assets/images/cat-violet.png';
 import sheepMargotImg from '../../../assets/images/sheep-margot.png';
 import bunnyFleurDeLisImg from '../../../assets/images/bunny-fleur-de-lis.png';
 import cowDaisyImg from '../../../assets/images/cow-daisy.png';
-import { useFavorites } from '../../../hooks/useFavoritesHooks';
+import { useFavorites } from '../../../hooks/useFavorites';
 
 const POPULAR_TOYS: Product[] = [ 
   {

@@ -3,7 +3,7 @@ import SectionTitle from '../../common/display/SectionTitle';
 import { recommendedProductsMock } from '../../../data/recommendedProducts.data';
 import ProductCard from '../../features/product/ProductCard';
 import { products } from '../../../data/productsDetails.data';
-import { useFavorites } from '../../../hooks/useFavoritesHooks';
+import { useFavorites } from '../../../hooks/useFavorites';
 
 const RecommendedProducts: React.FC = () => {
   const { toggleFavorite, isFavorite } = useFavorites();

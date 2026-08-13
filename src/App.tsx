@@ -1,7 +1,7 @@
 import { type ReactNode } from 'react';
 import Header from './components/layout/header/Header';
 import Footer from './components/layout/footer/Footer';
-import { FavoritesProvider } from './hooks/useFavorites';
+import { FavoritesProvider } from './context/FavoritesProvider';
 import { Toaster } from 'react-hot-toast';
 import { NotificationProvider } from './context/NotificationProvider';
 import { DiscountProvider } from './context/DiscountProvider';

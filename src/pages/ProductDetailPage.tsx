@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { useFavorites } from '../hooks/useFavoritesHooks';
+import { useFavorites } from '../hooks/useFavorites';
 import useProductDetail from '../hooks/useProductDetail';
 import useSelectedImage from '../hooks/useSelectedImage';
 import { useProductDetailActions } from '../hooks/useProductDetailActions';

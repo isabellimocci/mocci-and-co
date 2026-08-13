@@ -5,7 +5,7 @@ import { products } from '../data/productsDetails.data';
 import { priceRanges, sortOptions, categories } from '../data/products.data';
 import { getUniqueValues } from '../utils/productFilters.utils';
 import { useProductFilters } from '../hooks/useProductFilters';
-import { useFavorites } from '../hooks/useFavoritesHooks';
+import { useFavorites } from '../hooks/useFavorites';
 import FilterControls from '../components/features/filter/FilterControls';
 import SidebarFilter from '../components/features/filter/SidebarFilter';
 import Seo, { SITE_URL } from '../components/common/Seo';

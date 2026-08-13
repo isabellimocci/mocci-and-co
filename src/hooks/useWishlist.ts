@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { products } from '../data/products.data';
-import { useFavorites } from './useFavoritesHooks';
+import { useFavorites } from './useFavorites';
 import type { Product } from '../models/product.model';
 
 export interface WishlistState {
