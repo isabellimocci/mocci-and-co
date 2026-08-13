@@ -1,7 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import type { BankSlipProps } from './types';
 import { BANK_SLIP_MESSAGES, BANK_SLIP_INSTRUCTIONS, BANK_SLIP_STYLES } from './types';
 import { formatCurrency } from '../../../../utils/currency.utils';
+import { PAYMENT_CARD_STYLES } from '../../../../styles/paymentCard.styles';
+import CopyableCode from '../CopyableCode';
 
 const DUE_DAYS = 3;
 
@@ -32,35 +34,28 @@ const Barcode: React.FC<{ code: string }> = ({ code }) => {
 
 const BankSlip: React.FC<BankSlipProps> = ({ value, amount }) => {
   const isValidValue = value?.trim().length > 0;
-  const [copied, setCopied] = useState(false);
 
   const dueDate = useMemo(
     () => new Date(Date.now() + DUE_DAYS * 24 * 60 * 60 * 1000).toLocaleDateString('pt-BR'),
     []
   );
 
-  const handleCopy = async () => {
-    try {
-      await navigator.clipboard.writeText(value);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* clipboard unavailable */
-    }
-  };
-
   if (!isValidValue) {
     return (
-      <div className={BANK_SLIP_STYLES.CONTAINER}>
-        <span className={BANK_SLIP_STYLES.TITLE}>{BANK_SLIP_MESSAGES.TITLE}</span>
+      <div className={PAYMENT_CARD_STYLES.container}>
+        <span className={`${PAYMENT_CARD_STYLES.title} text-center`}>
+          {BANK_SLIP_MESSAGES.TITLE}
+        </span>
         <p className={BANK_SLIP_STYLES.INSTRUCTION}>{BANK_SLIP_MESSAGES.INVALID_CODE}</p>
       </div>
     );
   }
 
   return (
-    <div className={BANK_SLIP_STYLES.CONTAINER}>
-      <span className={BANK_SLIP_STYLES.TITLE}>{BANK_SLIP_MESSAGES.TITLE}</span>
+    <div className={PAYMENT_CARD_STYLES.container}>
+      <span className={`${PAYMENT_CARD_STYLES.title} text-center`}>
+        {BANK_SLIP_MESSAGES.TITLE}
+      </span>
 
       <div className={BANK_SLIP_STYLES.META_ROW}>
         <span className={BANK_SLIP_STYLES.META_LABEL}>{BANK_SLIP_MESSAGES.AMOUNT_LABEL}</span>
@@ -73,23 +68,20 @@ const BankSlip: React.FC<BankSlipProps> = ({ value, amount }) => {
 
       <Barcode code={value} />
 
-      <div className={BANK_SLIP_STYLES.CODE_ROW}>
-        <span className={BANK_SLIP_STYLES.CODE_DISPLAY} title={value}>
-          {value}
-        </span>
-        <button type="button" className={BANK_SLIP_STYLES.COPY_BTN} onClick={handleCopy}>
-          {copied ? 'Copied!' : 'Copy'}
-        </button>
-      </div>
+      <CopyableCode value={value} label="Copy boleto digitable line" />
 
-      <span className={BANK_SLIP_STYLES.INSTRUCTIONS_TITLE}>{BANK_SLIP_MESSAGES.HOW_TO_TITLE}</span>
-      <ol className={BANK_SLIP_STYLES.INSTRUCTIONS}>
+      <span className={PAYMENT_CARD_STYLES.instructionsTitle}>
+        {BANK_SLIP_MESSAGES.HOW_TO_TITLE}
+      </span>
+      <ol className={PAYMENT_CARD_STYLES.instructions}>
         {BANK_SLIP_INSTRUCTIONS.map((step, i) => (
           <li key={i}>{step}</li>
         ))}
       </ol>
 
-      <div className={BANK_SLIP_STYLES.DISCLAIMER}>{BANK_SLIP_MESSAGES.TEST_DISCLAIMER}</div>
+      <div className={`${PAYMENT_CARD_STYLES.disclaimer} text-center`}>
+        {BANK_SLIP_MESSAGES.TEST_DISCLAIMER}
+      </div>
     </div>
   );
 };
