@@ -22,8 +22,11 @@ const Header: React.FC = () => {
 
   return (
     <header className='shadow-sm p-4 sticky top-0 z-50 bg-background'>
-      <div className='container mx-auto flex items-center justify-between'>
-        <div className='flex items-center'>
+      {/* 3 columns: the side columns share the leftover space equally (1fr each),
+          so the logo (auto) sits at the true center regardless of how wide the
+          nav or the icon group happen to be. `justify-between` cannot do this. */}
+      <div className='container mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-2'>
+        <div className='flex items-center min-w-0'>
           <div className='flex items-center lg:hidden'>
             <button
               className='text-2xl p-2'
@@ -39,7 +42,7 @@ const Header: React.FC = () => {
           <DesktopNav />
         </div>
         <Logo />
-        <div className='flex items-center gap-1'>
+        <div className='flex items-center justify-end gap-1'>
           <button
             className='text-xl p-2 text-text-color'
             type='button'

@@ -25,7 +25,7 @@ function HeaderIcons() {
   const favoritesCount = favorites.length;
 
   return (
-    <div className="flex items-center gap-1 lg:ml-auto">
+    <div className="flex items-center gap-1">
       <button
         className="text-text-color text-xl lg:mr-3 relative"
         onClick={() => navigate('/wishlist')}
