@@ -100,13 +100,18 @@ const PaymentForm: FC<PaymentFormProps & { giftOptionsSlot?: ReactNode }> = ({
         </div>
       )}
       <ShippingDetailsInfo shippingDetails={shippingDetails} />
-      {giftOptionsSlot}
-      <PaymentMethodsSelector
-        selectedMethod={selectedMethod}
-        onSelect={handleMethodSelect}
-        loading={loading}
-        icons={paymentIcons}
-      />
+      {/* Once the boleto/Pix code is generated the order is locked: hide the
+          method selector and the gift options so the amount cannot change
+          underneath a code that was issued for the old total. "Back" returns. */}
+      {!showMock && giftOptionsSlot}
+      {!showMock && (
+        <PaymentMethodsSelector
+          selectedMethod={selectedMethod}
+          onSelect={handleMethodSelect}
+          loading={loading}
+          icons={paymentIcons}
+        />
+      )}
       {renderPaymentMock()}
       {renderPaymentForm()}
     </div>

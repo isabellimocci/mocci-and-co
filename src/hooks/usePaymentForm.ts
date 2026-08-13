@@ -33,6 +33,7 @@ export function usePaymentForm({ onChange, onBack, onFinalize }: UsePaymentFormP
   const handleMethodSelect = useCallback(
     (method: string) => {
       setSelectedMethod(method);
+      setShowMock(false);
     },
     []
   );
