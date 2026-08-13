@@ -12,244 +12,244 @@
 
   # Mocci & Co. Handwork E-commerce
 
-  A fictional handmade plush toy store, built as a portfolio project to showcase production-minded frontend engineering.
+  Uma loja fictícia de pelúcias artesanais, construída como projeto de portfólio para demonstrar engenharia frontend voltada para produção.
 
-  <strong><a href="https://mocci-and-co-handwork.vercel.app/">View the live demo</a></strong>
+  <strong><a href="https://mocci-and-co-handwork.vercel.app/">Ver a demo ao vivo</a></strong>
 
 </div>
 
 <br>
 
-## Table of Contents
+## Sumário
 
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Architecture and Design Decisions](#architecture-and-design-decisions)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Available Scripts](#available-scripts)
-- [Testing](#testing)
-- [Accessibility](#accessibility)
+- [Visão Geral](#visão-geral)
+- [Funcionalidades](#funcionalidades)
+- [Stack Tecnológica](#stack-tecnológica)
+- [Arquitetura e Decisões de Design](#arquitetura-e-decisões-de-design)
+- [Estrutura do Projeto](#estrutura-do-projeto)
+- [Como Começar](#como-começar)
+- [Scripts Disponíveis](#scripts-disponíveis)
+- [Testes](#testes)
+- [Acessibilidade](#acessibilidade)
 - [Performance](#performance)
-- [Visual Showcase](#visual-showcase)
+- [Vitrine Visual](#vitrine-visual)
 - [Roadmap](#roadmap)
-- [Known Limitations](#known-limitations)
-- [Conventions](#conventions)
-- [License and Copyright](#license-and-copyright)
+- [Limitações Conhecidas](#limitações-conhecidas)
+- [Convenções](#convenções)
+- [Licença e Direitos Autorais](#licença-e-direitos-autorais)
 
 <br>
 
-## Overview
+## Visão Geral
 
-**Mocci & Co. Handwork** is a fictional e-commerce site specializing in handmade plush toys. It was developed as a portfolio project to demonstrate frontend engineering with an emphasis on:
+**Mocci & Co. Handwork** é um e-commerce fictício especializado em pelúcias artesanais. Foi desenvolvido como projeto de portfólio para demonstrar engenharia frontend com ênfase em:
 
-- Scalable, feature-oriented software architecture
-- Componentization and code reuse through custom hooks
-- Modern, accessible user experience
-- Mobile-first responsive design
-- Performance and bundle optimization
+- Arquitetura de software escalável e orientada a features
+- Componentização e reuso de código por meio de custom hooks
+- Experiência de usuário moderna e acessível
+- Design responsivo mobile-first
+- Otimização de performance e bundle
 
-The project covers a realistic e-commerce flow end to end on the client: browsing, filtering, search, cart management, and a complete multi-step checkout with simulated payments.
+O projeto cobre um fluxo realista de e-commerce, do início ao fim, no client: navegação, filtros, busca, gerenciamento de carrinho e um checkout completo em múltiplas etapas com pagamentos simulados.
 
-> This is a frontend project. It runs entirely in the browser against mock data. A backend API is in progress (see [Roadmap](#roadmap)); it is intentionally not documented as a feature here until it ships.
+> Este é um projeto frontend. Ele roda inteiramente no navegador, usando dados mockados. Uma API de backend está em desenvolvimento (veja [Roadmap](#roadmap)); propositalmente ela não é documentada como funcionalidade aqui até ser lançada.
 
 <br>
 
-## Features
+## Funcionalidades
 
-### Product Catalog
-- **Multi-criteria filtering**: filter by category, color, and price range
-- **Debounced text search**: responsive search that avoids re-filtering on every keystroke (`useDebouncedValue`)
-- **Dynamic sorting**: by price (ascending/descending), name (A-Z / Z-A), and best-selling
-- **Memoized filtering and sorting**: computed with `useMemo` so results update instantly without unnecessary work
-- **Responsive filter UI**: adapted sidebar and controls for mobile and desktop
+### Catálogo de Produtos
+- **Filtragem multi-critério**: filtre por categoria, cor e faixa de preço
+- **Busca por texto com debounce**: busca responsiva que evita refazer a filtragem a cada tecla digitada (`useDebouncedValue`)
+- **Ordenação dinâmica**: por preço (crescente/decrescente), nome (A-Z / Z-A) e mais vendidos
+- **Filtragem e ordenação memoizadas**: calculadas com `useMemo` para que os resultados sejam atualizados instantaneamente, sem trabalho desnecessário
+- **UI de filtros responsiva**: sidebar e controles adaptados para mobile e desktop
 
-### Product Experience
-- **Interactive image gallery** with smooth transitions
-- **Mobile-optimized carousel** for touch navigation
-- **Full-screen lightbox** via `yet-another-react-lightbox`
-- **Recommended products** section ("You might also like")
-- **Reviews and ratings** with a reusable rating component
-- **Share** using the Web Share API, with a clipboard-copy fallback
+### Experiência do Produto
+- **Galeria de imagens interativa** com transições suaves
+- **Carrossel otimizado para mobile** para navegação por toque
+- **Lightbox em tela cheia** via `yet-another-react-lightbox`
+- **Seção de produtos recomendados** ("Você também pode gostar")
+- **Avaliações e notas** com um componente de rating reutilizável
+- **Compartilhamento** usando a Web Share API, com fallback de cópia para a área de transferência
 
-### Cart and Checkout
-- **Stock-aware cart**: quantities are clamped to available stock on both add and update
-- **Persistent cart**: cart contents are saved to `localStorage` and restored across sessions
-- **Multi-step checkout**: guided shipping and payment steps
-- **Simulated payment methods**: credit card (with installments), Pix (mocked QR code), and bank slip / boleto
-- **Discount codes**: a discount engine built on the Strategy pattern, structured so new coupon types can be added without touching call sites
-- **Gift options** at checkout
-- **Form validation**: real-time, type-safe validation driven by a reusable validation hook
+### Carrinho e Checkout
+- **Carrinho com controle de estoque**: as quantidades são limitadas ao estoque disponível tanto ao adicionar quanto ao atualizar itens
+- **Carrinho persistente**: o conteúdo do carrinho é salvo no `localStorage` e restaurado entre sessões
+- **Checkout em múltiplas etapas**: etapas guiadas de entrega e pagamento
+- **Métodos de pagamento simulados**: cartão de crédito (com parcelamento), Pix (QR code mockado) e boleto bancário
+- **Cupons de desconto**: um mecanismo de desconto construído com o padrão Strategy, estruturado para que novos tipos de cupom possam ser adicionados sem alterar os pontos de chamada
+- **Opções de presente** no checkout
+- **Validação de formulários**: validação em tempo real e type-safe, orientada por um hook de validação reutilizável
 
-### User Experience
-- **Toast notifications** using `react-hot-toast`
-- **Micro-interactions** powered by Framer Motion
-- **Persistent wishlist**: favorites saved to `localStorage`
-- **Error boundary** with a custom error page, plus a dedicated 404 page
-- **Loading states**: a custom loading screen used as the route-level Suspense fallback
+### Experiência do Usuário
+- **Notificações toast** usando `react-hot-toast`
+- **Microinterações** com Framer Motion
+- **Lista de desejos persistente**: favoritos salvos no `localStorage`
+- **Error boundary** com uma página de erro personalizada, além de uma página 404 dedicada
+- **Estados de carregamento**: uma tela de loading personalizada usada como fallback do Suspense em nível de rota
 
-### Engagement and Communication
-- **Newsletter signup**: an email capture form with its own validation hook
-- **Contact form**: a dedicated contact form with field-level validation
-- **Content pages**: FAQ, Privacy Policy, and Shipping & Returns
+### Engajamento e Comunicação
+- **Cadastro na newsletter**: um formulário de captura de e-mail com seu próprio hook de validação
+- **Formulário de contato**: um formulário de contato dedicado, com validação por campo
+- **Páginas de conteúdo**: FAQ, Política de Privacidade e Envio & Devoluções
 
 ### SEO
-- **Native React 19 metadata**: per-page `<title>`, meta description, and canonical link rendered without any third-party library (no `react-helmet`)
-- **Open Graph and Twitter Card**: full social preview tags (title, description, type, url, image) for rich link sharing
-- **Structured data (JSON-LD)**: schema blocks injected per page, with XSS-safe serialization
-- **Indexing control**: optional per-page `noindex` / `nofollow`
-- All of the above delivered through a single reusable `Seo` component, applied across every page
+- **Metadata nativa do React 19**: `<title>`, meta description e link canônico por página, renderizados sem nenhuma biblioteca de terceiros (sem `react-helmet`)
+- **Open Graph e Twitter Card**: tags completas de preview social (title, description, type, url, image) para compartilhamento de links enriquecido
+- **Dados estruturados (JSON-LD)**: blocos de schema injetados por página, com serialização segura contra XSS
+- **Controle de indexação**: `noindex` / `nofollow` opcionais por página
+- Tudo isso entregue por meio de um único componente `Seo` reutilizável, aplicado em todas as páginas
 
 <br>
 
-## Tech Stack
+## Stack Tecnológica
 
-| Category         | Technology                                                    |
+| Categoria         | Tecnologia                                                    |
 | ---------------- | ------------------------------------------------------------- |
 | **Framework**    | React 19                                                      |
-| **Language**     | TypeScript 5.8                                                |
-| **Build tool**   | Vite 6.3 (with the SWC React plugin)                          |
-| **Styling**      | Tailwind CSS 3.4                                              |
-| **Animation**    | Framer Motion 12                                              |
-| **Routing**      | React Router DOM 7.6                                          |
-| **Notifications**| React Hot Toast                                               |
-| **Icons**        | React Icons, Heroicons                                        |
-| **Media**        | Yet Another React Lightbox, qrcode-svg                        |
-| **Testing**      | Vitest, React Testing Library, jsdom                          |
-| **Code quality** | ESLint 9 (flat config) with typescript-eslint                |
-| **Deployment**   | Vercel                                                        |
+| **Linguagem**     | TypeScript 5.8                                                |
+| **Build tool**   | Vite 6.3 (com o plugin SWC para React)                          |
+| **Estilização**      | Tailwind CSS 3.4                                              |
+| **Animação**    | Framer Motion 12                                              |
+| **Roteamento**      | React Router DOM 7.6                                          |
+| **Notificações**| React Hot Toast                                               |
+| **Ícones**        | React Icons, Heroicons                                        |
+| **Mídia**        | Yet Another React Lightbox, qrcode-svg                        |
+| **Testes**      | Vitest, React Testing Library, jsdom                          |
+| **Qualidade de código** | ESLint 9 (flat config) com typescript-eslint                |
+| **Deploy**   | Vercel                                                        |
 
 <br>
 
-## Architecture and Design Decisions
+## Arquitetura e Decisões de Design
 
-The project follows a **feature-oriented, component-based architecture**. State and business rules live in **custom hooks** and **context providers**, keeping UI components focused on rendering.
+O projeto segue uma **arquitetura orientada a features e baseada em componentes**. O estado e as regras de negócio ficam em **custom hooks** e **context providers**, mantendo os componentes de UI focados na renderização.
 
-- **Custom hooks (26)**: cart, favorites, checkout state, form validation, filters, debounced input, discounts, and more. Business logic is extracted from components so it stays testable and reusable.
-- **Context, split by concern**: each global store separates its context definition from its provider (for example `CartContext.ts` + `CartProvider.tsx`, `DiscountContext.ts` + `DiscountProvider.tsx`). This keeps fast-refresh friendly boundaries and avoids re-render surprises.
-- **Strategy pattern for discounts** (`utils/discountStrategies.utils.ts`): a `DiscountStrategy` interface plus a resolver, so adding a new coupon type is a matter of adding a strategy rather than editing conditionals across the app.
-- **Route-level code splitting**: every page is loaded with `React.lazy` and rendered inside a single `Suspense` boundary with a custom loading fallback, so the initial bundle stays small.
-- **Error boundary**: the app is wrapped in an error boundary that renders a friendly error page, sharing one component with the 404 route.
-- **Stock-aware pricing helpers**: cart math (subtotal, item count, stock clamping) is implemented as small pure helpers, which keeps the logic predictable and easy to cover with tests.
+- **Custom hooks (26)**: carrinho, favoritos, estado do checkout, validação de formulários, filtros, input com debounce, descontos, entre outros. A lógica de negócio é extraída dos componentes para permanecer testável e reutilizável.
+- **Context, separado por responsabilidade**: cada store global separa a definição do context do seu provider (por exemplo, `CartContext.ts` + `CartProvider.tsx`, `DiscountContext.ts` + `DiscountProvider.tsx`). Isso mantém limites amigáveis ao fast refresh e evita surpresas com re-renderizações.
+- **Padrão Strategy para descontos** (`utils/discountStrategies.utils.ts`): uma interface `DiscountStrategy` mais um resolver, de forma que adicionar um novo tipo de cupom seja apenas uma questão de adicionar uma strategy, em vez de editar condicionais espalhadas pela aplicação.
+- **Code splitting em nível de rota**: cada página é carregada com `React.lazy` e renderizada dentro de um único boundary `Suspense` com um fallback de loading personalizado, mantendo o bundle inicial enxuto.
+- **Error boundary**: a aplicação é envolvida por um error boundary que renderiza uma página de erro amigável, compartilhando o mesmo componente com a rota 404.
+- **Helpers de precificação com controle de estoque**: os cálculos do carrinho (subtotal, contagem de itens, limitação de estoque) são implementados como pequenos helpers puros, o que torna a lógica previsível e fácil de cobrir com testes.
 
 <br>
 
-## Project Structure
+## Estrutura do Projeto
 
 ```
 src/
-├── assets/        # Fonts, images, favicon
+├── assets/        # Fontes, imagens, favicon
 ├── components/
-│   ├── common/    # Generic UI (buttons, display, feedback, form, icons)
-│   ├── features/  # Feature components (cart, checkout, payment, product, filter, contact)
-│   ├── layout/    # Header and footer
-│   └── sections/  # Page sections (home, product, policy, common)
-├── constants/     # Global constants
-├── context/       # Global state (context + provider files)
-├── data/          # Mock data (products, filters)
+│   ├── common/    # UI genérica (buttons, display, feedback, form, icons)
+│   ├── features/  # Componentes de feature (cart, checkout, payment, product, filter, contact)
+│   ├── layout/    # Header e footer
+│   └── sections/  # Seções de página (home, product, policy, common)
+├── constants/     # Constantes globais
+├── context/       # Estado global (arquivos de context + provider)
+├── data/          # Dados mockados (products, filters)
 ├── hooks/         # Custom hooks
-├── models/        # Domain models
-├── pages/         # Route pages
-├── styles/        # Global styles
-├── types/         # Shared type definitions
-└── utils/         # Pure helpers (currency, discounts, filters, order, payment, qrcode)
+├── models/        # Modelos de domínio
+├── pages/         # Páginas de rota
+├── styles/        # Estilos globais
+├── types/         # Definições de tipos compartilhadas
+└── utils/         # Helpers puros (currency, discounts, filters, order, payment, qrcode)
 ```
 
-**Pages / routes**: Home (`/`), Products (`/products`), Product Detail (`/products/:id`), About (`/about`), Contact (`/contact`), Cart (`/cart`), Wishlist (`/wishlist`), Checkout (`/checkout`), FAQ (`/faq`), Privacy Policy (`/privacy-policy`), Shipping & Returns (`/shipping-returns`), and a 404 fallback.
+**Páginas / rotas**: Home (`/`), Produtos (`/products`), Detalhe do Produto (`/products/:id`), Sobre (`/about`), Contato (`/contact`), Carrinho (`/cart`), Lista de Desejos (`/wishlist`), Checkout (`/checkout`), FAQ (`/faq`), Política de Privacidade (`/privacy-policy`), Envio & Devoluções (`/shipping-returns`) e um fallback 404.
 
 <br>
 
-## Getting Started
+## Como Começar
 
-### Prerequisites
-- **Node.js 18 or higher** (Node 20 LTS recommended; required by Vite 6)
-- **npm** (the repo ships a `package-lock.json`)
+### Pré-requisitos
+- **Node.js 18 ou superior** (recomenda-se Node 20 LTS; exigido pelo Vite 6)
+- **npm** (o repositório inclui um `package-lock.json`)
 
-No environment variables are required to run the project. It uses mock data and does not call an external API.
+Nenhuma variável de ambiente é necessária para rodar o projeto. Ele usa dados mockados e não faz chamadas a uma API externa.
 
-### Installation
+### Instalação
 
 ```bash
-# 1. Clone the repository
+# 1. Clone o repositório
 git clone https://github.com/isabellimocci/handwork-ecommerce.git
 cd handwork-ecommerce
 
-# 2. Install dependencies
+# 2. Instale as dependências
 npm install
 
-# 3. Start the dev server
+# 3. Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-The app will be available at the URL Vite prints in the terminal (by default `http://localhost:5173`).
+A aplicação ficará disponível na URL exibida pelo Vite no terminal (por padrão, `http://localhost:5173`).
 
-### Production build
+### Build de produção
 
 ```bash
-npm run build     # type-checks with tsc, then builds with Vite
-npm run preview   # serves the production build locally
+npm run build     # verifica os tipos com tsc e depois builda com Vite
+npm run preview   # serve o build de produção localmente
 ```
 
 <br>
 
-## Available Scripts
+## Scripts Disponíveis
 
-| Script            | Description                                             |
+| Script            | Descrição                                             |
 | ----------------- | ------------------------------------------------------- |
-| `npm run dev`     | Start the Vite development server                       |
-| `npm run build`   | Type-check (`tsc -b`) and produce a production build    |
-| `npm run preview` | Preview the production build locally                    |
-| `npm run lint`    | Run ESLint across the project                           |
-| `npm run test`    | Run the test suite with Vitest                          |
+| `npm run dev`     | Inicia o servidor de desenvolvimento do Vite                       |
+| `npm run build`   | Verifica os tipos (`tsc -b`) e gera um build de produção    |
+| `npm run preview` | Faz o preview do build de produção localmente                    |
+| `npm run lint`    | Executa o ESLint em todo o projeto                           |
+| `npm run test`    | Executa a suíte de testes com Vitest                          |
 
 <br>
 
-## Testing
+## Testes
 
-Tests run on **Vitest** with **React Testing Library** and **jsdom**.
+Os testes rodam com **Vitest**, **React Testing Library** e **jsdom**.
 
 ```bash
 npm run test
 ```
 
-Current coverage focuses on the checkout flow (rendering of shipping fields and shipping options). Coverage is being expanded toward the pure business logic that is most valuable to guard: discount validation (`validateDiscount`), cart subtotal and stock clamping, and currency formatting. Contributions to tests follow the existing `*.test.tsx` colocated pattern.
+A cobertura atual está focada no fluxo de checkout (renderização dos campos de entrega e das opções de envio). A cobertura está sendo expandida para a lógica de negócio pura mais importante de proteger: validação de desconto (`validateDiscount`), subtotal do carrinho e limitação de estoque, e formatação de moeda. Contribuições em testes seguem o padrão existente de arquivos `*.test.tsx` colocalizados.
 
 <br>
 
-## Accessibility
+## Acessibilidade
 
-Accessibility is a first-class concern in this project. The interface is built with semantic HTML, keyboard-operable controls, and meaningful labels, and the visual layer targets sufficient color contrast.
+Acessibilidade é uma preocupação de primeira classe neste projeto. A interface é construída com HTML semântico, controles operáveis via teclado e labels significativos, e a camada visual busca contraste de cor suficiente.
 
-> To keep this section honest and current, run an audit (Lighthouse and/or axe DevTools) against the deployed build and record the results below.
+> Para manter esta seção honesta e atualizada, rode uma auditoria (Lighthouse e/ou axe DevTools) contra o build publicado e registre os resultados abaixo.
 
-| Audit             | Score |
+| Auditoria             | Nota |
 | ----------------- | ----- |
-| Lighthouse (a11y) | _run and fill in_ |
+| Lighthouse (a11y) | _rodar e preencher_ |
 
 <br>
 
 ## Performance
 
-Performance is supported by:
-- **Route-level code splitting** with `React.lazy` and `Suspense`
-- **SWC-based compilation** via `@vitejs/plugin-react-swc`
-- **Memoized filtering and sorting** to avoid redundant computation
-- **Optimized image assets** for the showcase and product media
+A performance é sustentada por:
+- **Code splitting em nível de rota** com `React.lazy` e `Suspense`
+- **Compilação baseada em SWC** via `@vitejs/plugin-react-swc`
+- **Filtragem e ordenação memoizadas** para evitar computação redundante
+- **Assets de imagem otimizados** para a vitrine e a mídia dos produtos
 
-> Lighthouse numbers change with every meaningful UI change. Re-run against the current deployment and update the table below rather than trusting older results.
+> Os números do Lighthouse mudam a cada alteração relevante na UI. Rode novamente contra o deploy atual e atualize a tabela abaixo em vez de confiar em resultados antigos.
 
-| Metric          | Score |
+| Métrica          | Nota |
 | --------------- | ----- |
-| Performance     | _run and fill in_ |
-| Best Practices  | _run and fill in_ |
-| SEO             | _run and fill in_ |
+| Performance     | _rodar e preencher_ |
+| Best Practices  | _rodar e preencher_ |
+| SEO             | _rodar e preencher_ |
 
 <br>
 
-## Visual Showcase
+## Vitrine Visual
 
-The clips below are looping animations. For a non-animated, fully interactive version, visit the [live demo](https://mocci-and-co-handwork.vercel.app/).
+Os clipes abaixo são animações em loop. Para uma versão não animada e totalmente interativa, visite a [demo ao vivo](https://mocci-and-co-handwork.vercel.app/).
 
 ### Desktop
 
@@ -257,7 +257,7 @@ The clips below are looping animations. For a non-animated, fully interactive ve
   <img src="./public/desktop-demo.gif" alt="Animated walkthrough of the desktop store: browsing the plush toy catalog, filtering products, opening a product page, and adding an item to the cart">
 </div>
 
-Desktop walkthrough: browsing the catalog, filtering products, opening a product page, and adding an item to the cart.
+Tour pelo desktop: navegando pelo catálogo, filtrando produtos, abrindo uma página de produto e adicionando um item ao carrinho.
 
 ### Mobile
 
@@ -265,36 +265,36 @@ Desktop walkthrough: browsing the catalog, filtering products, opening a product
   <img src="./public/mobile-demo.gif" alt="Animated walkthrough of the mobile store: the responsive layout, mobile navigation, and adding a product to the cart" width="200px">
 </div>
 
-Mobile walkthrough: the responsive layout, mobile navigation, and adding a product to the cart.
+Tour pelo mobile: o layout responsivo, a navegação mobile e a adição de um produto ao carrinho.
 
 <br>
 
 ## Roadmap
 
-- [ ] **Backend API** (in progress): move products, cart, and orders behind a real service
-- [ ] **User authentication**: accounts, sessions, and protected checkout
-- [ ] **Real inventory**: server-driven stock with live availability
-- [ ] **Order persistence and history**
-- [ ] **Broader automated test coverage** across hooks and business logic
+- [ ] **API de backend** (em andamento): mover produtos, carrinho e pedidos para trás de um serviço real
+- [ ] **Autenticação de usuário**: contas, sessões e checkout protegido
+- [ ] **Estoque real**: estoque controlado pelo servidor, com disponibilidade ao vivo
+- [ ] **Persistência e histórico de pedidos**
+- [ ] **Cobertura de testes automatizados mais ampla** em hooks e lógica de negócio
 
 <br>
 
-## Known Limitations
+## Limitações Conhecidas
 
-- **Mock data**: products and filters come from static data, not a live API
-- **Simulated payments**: the checkout completes a fake payment flow with no real transactions
-- **No authentication yet**: there are no user accounts in this version
-- **Client-side stock only**: stock levels are static and enforced in the browser; there is no real-time inventory
-- **Forms are client-side**: the contact and newsletter forms validate input but do not yet persist or send it, pending the backend
+- **Dados mockados**: produtos e filtros vêm de dados estáticos, não de uma API real
+- **Pagamentos simulados**: o checkout completa um fluxo de pagamento falso, sem transações reais
+- **Ainda sem autenticação**: não há contas de usuário nesta versão
+- **Estoque apenas no client**: os níveis de estoque são estáticos e aplicados no navegador; não há inventário em tempo real
+- **Formulários apenas no client**: os formulários de contato e newsletter validam a entrada, mas ainda não a persistem nem a enviam, aguardando o backend
 
 <br>
 
-## Conventions
+## Convenções
 
-- **Commits** follow [Conventional Commits](https://www.conventionalcommits.org/) (`feat`, `fix`, `refactor`, `chore`, `docs`, `style`, `test`)
-- **Components** use PascalCase filenames; **hooks** use the `useX` convention; **pure helpers** use the `*.utils.ts` suffix and **domain models** use `*.model.ts`
-- **Path aliases** are configured in the TypeScript and Vite config for clean imports
-- **Suggested addition**: declare a supported Node version in `package.json` via an `engines` field (for example `"engines": { "node": ">=18" }`) so contributors and CI use a compatible runtime
+- **Commits** seguem o padrão [Conventional Commits](https://www.conventionalcommits.org/) (`feat`, `fix`, `refactor`, `chore`, `docs`, `style`, `test`)
+- **Componentes** usam nomes de arquivo em PascalCase; **hooks** seguem a convenção `useX`; **helpers puros** usam o sufixo `*.utils.ts` e **modelos de domínio** usam `*.model.ts`
+- **Path aliases** estão configurados no TypeScript e no Vite para imports mais limpos
+- **Sugestão de adição**: declarar uma versão suportada do Node no `package.json` por meio do campo `engines` (por exemplo, `"engines": { "node": ">=18" }`), para que contribuidores e CI usem um runtime compatível
 
 <br>
 
@@ -302,19 +302,19 @@ Mobile walkthrough: the responsive layout, mobile navigation, and adding a produ
 
 <div align="center">
 
-## License and Copyright
+## Licença e Direitos Autorais
 
-© 2025-2026 Isabelli Mocci. All rights reserved.
+© 2025-2026 Isabelli Mocci. Todos os direitos reservados.
 
-This is a personal portfolio project. The design, code, and concept may not be copied, modified, or distributed without permission.
+Este é um projeto pessoal de portfólio. O design, o código e o conceito não podem ser copiados, modificados ou distribuídos sem permissão.
 
 <br>
 
-Made with 🩷 by <a href="https://www.isabellimocci.com/">Isabelli Mocci</a>
+Feito com 🩷 por <a href="https://www.isabellimocci.com/">Isabelli Mocci</a>
 
-[🌐 Portfolio](https://www.isabellimocci.com/)
+[🌐 Portfólio](https://www.isabellimocci.com/)
 | [💼 LinkedIn](https://www.linkedin.com/in/isabellimocci/)
 | [🐱 GitHub](https://github.com/isabellimocci)
-| [📬 Email](mailto:isabellimocci.tech@gmail.com)
+| [📬 E-mail](mailto:isabellimocci.tech@gmail.com)
 
 </div>
