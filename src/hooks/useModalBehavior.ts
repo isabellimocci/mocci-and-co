@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
+import { getScrollContainer } from '../utils/scrollContainer.utils';
 
 interface UseModalBehaviorOptions {
   isOpen: boolean;
   onClose: () => void;
-  /** Panel element to focus on open (and restore focus from on close). */
   ref?: React.RefObject<HTMLElement | null>;
-  /** Lock body scroll while open (default true). Disable for dropdown-style menus. */
   lockScroll?: boolean;
 }
 
-/**
- * Shared accessible-modal behavior: Escape to close, body scroll lock, and
- * focus move to the panel on open with focus restored to the trigger on close.
- */
-export function useModalBehavior({ isOpen, onClose, ref, lockScroll = true }: UseModalBehaviorOptions) {
+export function useModalBehavior({
+  isOpen,
+  onClose,
+  ref,
+  lockScroll = true,
+}: UseModalBehaviorOptions) {
   useEffect(() => {
     if (!isOpen) return;
     const onKeyDown = (event: KeyboardEvent) => {
@@ -25,10 +25,14 @@ export function useModalBehavior({ isOpen, onClose, ref, lockScroll = true }: Us
 
   useEffect(() => {
     if (!isOpen || !lockScroll) return;
-    const previous = document.body.style.overflow;
+    const container = getScrollContainer();
+    const previousContainer = container.style.overflow;
+    const previousBody = document.body.style.overflow;
+    container.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
     return () => {
-      document.body.style.overflow = previous;
+      container.style.overflow = previousContainer;
+      document.body.style.overflow = previousBody;
     };
   }, [isOpen, lockScroll]);
 

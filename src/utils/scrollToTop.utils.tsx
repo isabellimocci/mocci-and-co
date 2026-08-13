@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import { scrollPageToTop } from './scrollContainer.utils';
 
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
@@ -8,7 +9,7 @@ const ScrollToTop: React.FC = () => {
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
     }
-    window.scrollTo(0, 0);
+    scrollPageToTop();
   }, [pathname]);
 
   return null;
