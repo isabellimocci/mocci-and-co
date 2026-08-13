@@ -1,6 +1,5 @@
 const onlyDigits = (value: string): string => value.replace(/\D/g, '');
 
-/** Luhn checksum — rejects transposition/typo'd card numbers. */
 function luhnValid(digits: string): boolean {
   let sum = 0;
   let double = false;
@@ -31,7 +30,6 @@ export function isValidCVV(cvv: string): boolean {
   return /^\d{3}$/.test(cvv.trim());
 }
 
-/** Valid MM/YY, month 01-12, and not already expired. */
 export function isValidExpiryDate(expiry: string): boolean {
   const match = /^(\d{2})\/(\d{2})$/.exec(expiry.trim());
   if (!match) return false;

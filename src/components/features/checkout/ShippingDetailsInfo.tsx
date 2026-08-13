@@ -5,8 +5,7 @@ interface ShippingDetailsInfoProps {
   shippingDetails: ShippingDetails;
 }
 
-// Label recedes (small, secondary), value stands out (darker, medium weight) —
-// so the eye jumps straight to the data instead of reading label-by-label.
+
 const Field: React.FC<{ label: string; value: string }> = ({ label, value }) => (
   <div>
     <dt className='text-[11px] font-semibold uppercase tracking-wide text-text/50'>{label}</dt>
@@ -14,8 +13,6 @@ const Field: React.FC<{ label: string; value: string }> = ({ label, value }) => 
   </div>
 );
 
-// Informational (already-confirmed) data: kept in the background (no card/border)
-// so the interactive Gift options block next to it carries more visual weight.
 const ShippingDetailsInfo: React.FC<ShippingDetailsInfoProps> = ({ shippingDetails }) => (
   <div className='mb-6'>
     <h3 className='text-xs font-bold uppercase tracking-wider text-text/60 mb-3'>Shipping Details</h3>
